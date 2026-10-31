@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Big_Shoulders, IBM_Plex_Sans, JetBrains_Mono, Source_Serif_4 } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
+import { clerkAppearance, clerkLocalization } from './clerk-theme'
 import { Providers } from './providers'
 import './globals.css'
 
@@ -23,7 +24,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     >
       <body className="min-h-full flex flex-col">
         {/* Inside <body>, not around <html>: required with cacheComponents (Clerk core 3). */}
-        <ClerkProvider signInUrl="/sign-in">
+        <ClerkProvider signInUrl="/sign-in" appearance={clerkAppearance} localization={clerkLocalization}>
           <Providers>{children}</Providers>
         </ClerkProvider>
       </body>
