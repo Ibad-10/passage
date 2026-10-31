@@ -1,0 +1,29 @@
+{
+  "_note": "Spec §2. All prices are placeholders. Amounts are GBP pence. null = spec gives no figure.",
+  "currency": "GBP",
+  "fairUseClassifications": null,
+  "plans": {
+    "P": {
+      "baseFeeMonthly": { "min": 25000, "max": 25000 },
+      "items": {
+        "emerging": { "min": 50000, "max": 150000 },
+        "general_setup": { "min": 25000, "max": 50000 },
+        "general_shipment": { "min": 2500, "max": 5000 },
+        "individual": { "min": 100000, "max": 250000 },
+        "consultation": { "min": null, "max": null, "per": "hour" },
+        "sanctions_licence": { "min": null, "max": null, "per": "hour" }
+      }
+    },
+    "S": {
+      "baseFeeMonthly": { "min": 50000, "max": 150000, "tieredBy": "shipments per month" },
+      "items": {
+        "emerging": { "min": 50000, "max": 150000 },
+        "general_setup": { "min": 25000, "max": 50000 },
+        "general_shipment": { "min": 0, "max": 0, "note": "Included up to tier limit" },
+        "individual": { "min": 100000, "max": 250000, "discountPercent": 20, "_discountNote": "spec says 'Discounted'; 20% is a placeholder" },
+        "consultation": { "min": null, "max": null, "per": "hour" },
+        "sanctions_licence": { "min": null, "max": null, "per": "hour" }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "_note": "Placeholder country lists (ISO 3166-1 alpha-2). Confirm with officer before use.",
+  "matchThreshold": 0.7,
+  "prohibitedDestinations": ["RU", "BY", "KP", "IR", "SY"],
+  "redFlagCountries": ["AM", "GE", "KZ", "KG", "AE", "TR"],
+  "listsChecked": ["UK", "EU", "UN", "US"]
+}
