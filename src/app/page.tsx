@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { redirect } from 'next/navigation'
+import { connection } from 'next/server'
 import { getCurrentUser } from '@/server/session'
 import { isClientUser } from '@/server/core'
 
@@ -13,6 +14,7 @@ export default function Home() {
 }
 
 async function Go(): Promise<null> {
+  await connection()
   const user = await getCurrentUser()
   if (!user) redirect('/sign-in')
   redirect(isClientUser(user) ? '/cases' : '/desk')

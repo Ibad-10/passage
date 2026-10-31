@@ -1,6 +1,18 @@
 import type { CaseState } from '@/domain/types'
-import { CASE_STEPS, type TimelineStep } from '@/components/passage/case-timeline'
+import type { TimelineStep } from '@/components/passage/case-timeline'
 import type { ScreeningStatus } from '@/components/passage/chips'
+
+// Copy of the timeline's 7 steps: case-timeline.tsx is a client module, so its runtime values
+// can't be imported into server code.
+const CASE_STEPS = [
+  { label: 'Intake', sub: 'Complete' },
+  { label: 'Sanctions', sub: 'Parties screened' },
+  { label: 'Classification', sub: 'AI + analyst' },
+  { label: 'Officer sign-off', sub: '≤2 working days' },
+  { label: 'Route + quote', sub: 'A · B · C · D' },
+  { label: 'Licence', sub: 'ECJU ~4 weeks' },
+  { label: 'Ship', sub: 'Customs + records' },
+]
 
 // Which of the 7 timeline steps a case state sits on (0-based). Closed states mark everything done up to them.
 const STEP_OF: Record<CaseState, number> = {
