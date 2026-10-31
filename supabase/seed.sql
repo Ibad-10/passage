@@ -38,3 +38,8 @@ insert into assignments (case_id, user_id, role) values
   ('00000000-0000-0000-0000-000000000401', '00000000-0000-0000-0000-000000000201', 'analyst'),
   ('00000000-0000-0000-0000-000000000401', '00000000-0000-0000-0000-000000000202', 'officer'),
   ('00000000-0000-0000-0000-000000000401', '00000000-0000-0000-0000-000000000203', 'specialist');
+
+-- Developer account (signs in with Google through Clerk; linked by verified email on first sign-in).
+insert into users (id, org_id, name, email, role, identity_verified, vetting_level, location) values
+  ('00000000-0000-0000-0000-000000000901', '00000000-0000-0000-0000-000000000001', 'Ibad Zuberi (dev)', 'ibadullahzuberi@gmail.com', 'client_admin', true, 'sc', 'GB')
+on conflict (email) do nothing;

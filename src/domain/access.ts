@@ -24,7 +24,9 @@ export function canView(ctx: ViewContext): boolean {
   if (!can(user.role, 'view_technical', { assigned: true, partnerFlag: ctx.partnerFlag })) return false
   if (!user.identity_verified) return false
   if (vettingRank(user.vetting_level) < vettingRank(requiredVetting(file.sensitivity))) return false
-  if (controlled && !ctx.officerApprovedUserIds.includes(user.id)) return false
+  // Product decision: client users of the owning org always see their own files; officer approval
+  // for controlled_technology applies only to internal and partner users (org match is checked below).
+  if (controlled && !isClient && !ctx.officerApprovedUserIds.includes(user.id)) return false
   // Client users are assigned to every case in their own org (§7.3); everyone else needs an Assignment.
   const assigned = isClient ? user.org_id === caseRow.org_id : ctx.assignedUserIds.includes(user.id)
   if (!assigned) return false

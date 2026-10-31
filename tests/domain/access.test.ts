@@ -56,6 +56,17 @@ describe('canView (§7.4, conditions in order)', () => {
     expect(canView(ctx(ct))).toBe(false)
     expect(canView(ctx({ ...ct, officerApprovedUserIds: ['u-analyst'] }))).toBe(true)
   })
+  it('5. client users of the owning org see their own controlled_technology without officer approval', () => {
+    const ct = { file: { sensitivity: 'controlled_technology' as const }, assignedUserIds: [], officerApprovedUserIds: [] }
+    expect(canView(ctx({ ...ct, user: { role: 'client_member', org_id: 'org1' } }))).toBe(true)
+    expect(canView(ctx({ ...ct, user: { role: 'client_viewer', org_id: 'org1' } }))).toBe(true)
+    // another org's client user still fails on assignment
+    expect(canView(ctx({ ...ct, user: { role: 'client_member', org_id: 'other' } }))).toBe(false)
+    // internal and partner users still need officer approval
+    expect(canView(ctx({ ...ct, assignedUserIds: ['u-analyst'] }))).toBe(false)
+    const partner = { id: 'u-partner', role: 'partner' as Role, location: 'GB' }
+    expect(canView(ctx({ ...ct, user: partner, assignedUserIds: ['u-partner'], partnerFlag: true }))).toBe(false)
+  })
   it('6. Review Focus 2: unassigned analyst', () => {
     expect(canView(ctx({ assignedUserIds: [] }))).toBe(false)
   })
