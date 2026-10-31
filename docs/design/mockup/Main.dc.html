@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Case CTS-0142</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+:root{--bg:oklch(0.145 0.003 286);--surface:oklch(0.172 0.004 286);--surface-2:oklch(0.215 0.005 286);--surface-3:oklch(0.225 0.006 286);--surface-inset:oklch(0.155 0.003 286);--border:oklch(1 0 0 / 7.5%);--border-strong:oklch(1 0 0 / 12%);--text:oklch(0.955 0.003 286);--text-muted:oklch(0.72 0.012 286);--text-dim:oklch(0.65 0.012 286);--line-dim:oklch(0.45 0.01 286);--accent:oklch(0.68 0.2 29);--accent-ink:oklch(0.14 0.01 40);--accent-hover:oklch(0.74 0.19 29);--accent-shine:oklch(0.82 0.13 40);--brand:oklch(0.68 0.2 29);--ok:oklch(0.74 0.14 160);--ok-ink:oklch(0.14 0.02 160);--ok-soft:oklch(0.74 0.14 160 / 16%);--ok-bg:oklch(0.74 0.14 160 / 8%);--ok-border:oklch(0.74 0.14 160 / 30%);--info:oklch(0.72 0.13 255);--info-bg:oklch(0.72 0.13 255 / 8%);--info-border:oklch(0.72 0.13 255 / 30%);--danger:oklch(0.7 0.18 22);--danger-bg:oklch(0.7 0.18 22 / 8%);--danger-border:oklch(0.7 0.18 22 / 35%);--warn:oklch(0.8 0.14 80);--warn-bg:oklch(0.8 0.14 80 / 8%);--warn-border:oklch(0.8 0.14 80 / 30%);--warn-text:oklch(0.8 0.14 80);--sel-bg:oklch(0.68 0.2 29 / 10%);--grid:oklch(1 0 0 / 4%)}
+.light{--bg:#F7F8FA;--surface:#FFFFFF;--surface-2:#EEF1F6;--surface-3:#EEF2FA;--surface-inset:#FFFFFF;--border:#DDE2EA;--border-strong:#C9D0DB;--text:#0E1A2F;--text-muted:#4A5872;--text-dim:#4A5872;--line-dim:#9AA5B8;--accent:#13306B;--accent-ink:#FFFFFF;--accent-hover:#0E2552;--accent-shine:#3A5DA8;--brand:#C2362B;--ok:#0F7A3D;--ok-ink:#FFFFFF;--ok-soft:#E3F3EA;--ok-bg:#F0F8F3;--ok-border:#B9DFC8;--info:#1D4ED8;--info-bg:#EEF3FD;--info-border:#BFD0F5;--danger:#B42318;--danger-bg:#FDF0EF;--danger-border:#F1C2BD;--warn:#A15C07;--warn-bg:#FBF4E8;--warn-border:#E9CF9F;--warn-text:#A15C07;--sel-bg:#E8EEF8;--grid:#E8EBF0}
+a{color:var(--accent)}a:hover{color:var(--accent-hover)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.rise{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}.d4{animation-delay:.24s}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(161,92,7,.45)}70%{box-shadow:0 0 0 10px rgba(161,92,7,0)}100%{box-shadow:0 0 0 0 rgba(161,92,7,0)}}
+.pulse{animation:pulse 1.8s infinite}
+@keyframes scan{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.scan{position:relative;overflow:hidden}
+.scan::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(29,78,216,.08),transparent);animation:scan 2.4s infinite}
+@keyframes fill{from{width:0}}
+.fill{animation:fill 1.2s cubic-bezier(.2,.7,.2,1) both}
+.btn{transition:background .15s,transform .15s,border-color .15s;cursor:pointer}
+.btn:hover{transform:translateY(-1px)}
+.row{transition:background .15s}.row:hover{background:var(--surface-2)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.5">
+
+  <header style="border-bottom: 1px solid var(--border); background: var(--bg)">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 14px clamp(16px, 3vw, 32px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+      <div style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap">
+        <a href="CaseList.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--brand)" stroke-width="1.8" aria-hidden="true"><path d="M12 2 3 6v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V6l-9-4z"></path><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .14em; font-weight: 500">PASSAGE</span>
+        </a>
+        <nav style="display: flex; gap: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em">
+          <a href="CaseList.dc.html" style="color: var(--text); text-decoration: none">SHIPMENTS</a>
+          <a href="#" style="color: var(--text-dim); text-decoration: none">PRODUCTS</a>
+          <a href="#" style="color: var(--text-dim); text-decoration: none">LICENCES</a>
+          <a href="#" style="color: var(--text-dim); text-decoration: none">RECORDS</a>
+        </nav>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: .1em">SKYLINE DRONES LTD</span>
+        <button type="button" class="btn" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" title="{{themeLabel}}" style="width: 44px; height: 44px; flex: none; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); cursor: pointer; padding: 0"><sc-if value="{{isDark}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if><sc-if value="{{isLight}}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></sc-if></button>
+        <span style="width: 32px; height: 32px; border-radius: 50%; background: var(--surface-3); border: 1px solid var(--border-strong); border-radius: 8px; display: grid; place-items: center; font-size: 12px; font-weight: 600">MO</span>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width: 1400px; margin: 0 auto; padding: 28px clamp(16px, 3vw, 32px) 64px">
+    <div class="rise" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 24px">
+      <div style="min-width: 0">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; color: var(--text-dim); margin-bottom: 8px"><a href="CaseList.dc.html" style="color: var(--text-dim); text-decoration: none">SHIPMENTS</a> / CTS-0142</div>
+        <h1 style="font-family: 'Source Serif 4', Georgia, serif; margin: 0; font-size: clamp(24px, 3vw, 34px); font-weight: 600; letter-spacing: -.02em; line-height: 1.15">15 × Kestrel-4 ISR drones → Kyiv</h1>
+        <p style="margin: 8px 0 0; color: var(--text-muted)">Buyer: Kalyna Systems TOV (Ukraine) · Deadline 28 Nov 2026 · Opened 31 Oct by Mira Okafor</p>
+      </div>
+      <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid var(--warn-border); border-radius: 8px; background: var(--warn-bg); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; border-radius: 2px">
+        <span class="pulse" style="width: 7px; height: 7px; border-radius: 50%; background: var(--accent)"></span>{{stateLabel}}
+      </span>
+    </div>
+
+    <section class="rise d1" aria-label="Progress" style="border: 1px solid var(--border); border-radius: 8px; background: var(--surface); margin-bottom: 24px; overflow-x: auto">
+      <ol style="list-style: none; margin: 0; padding: 20px 24px; display: grid; grid-template-columns: repeat(7, minmax(110px, 1fr)); gap: 0; min-width: 780px">
+        <sc-for list="{{steps}}" as="s" hint-placeholder-count="7">
+          <li style="display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: center">
+              <span class="{{s.dotClass}}" style="{{s.dotStyle}}"></span>
+              <span style="flex: 1; height: 2px; background: var(--border); position: relative; overflow: hidden"><span class="fill" style="{{s.barStyle}}"></span></span>
+            </div>
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--text-dim)">{{s.n}}</div>
+              <div style="{{s.labelStyle}}">{{s.label}}</div>
+              <div style="font-size: 12px; color: var(--text-dim)">{{s.sub}}</div>
+            </div>
+          </li>
+        </sc-for>
+      </ol>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+      <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+
+        <sc-if value="{{showAsk}}" hint-placeholder-val="{{ true }}">
+          <section class="rise d2" style="border: 1px solid var(--warn-border); border-radius: 8px; background: var(--warn-bg); padding: 20px 24px">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: flex-start">
+              <div style="min-width: 0">
+                <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 6px">
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; padding: 3px 8px; background: var(--accent); color: var(--accent-ink); font-weight: 600">ANSWER</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: .08em">YOUR NEXT ACTION</span>
+                </div>
+                <h2 style="margin: 0 0 4px; font-size: 18px; font-weight: 600">Confirm the consignee's company registration number</h2>
+                <p style="margin: 0; color: var(--text-muted); max-width: 620px">“Volna Logistics LLC” is similar to a name on the UK consolidated list. A registration number lets our analyst rule it out. Nothing else on this shipment is blocked.</p>
+              </div>
+              <sc-if value="{{notOpen}}" hint-placeholder-val="{{ true }}">
+                <button class="btn" onClick="{{openReply}}" style="background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 6px; padding: 12px 18px; font-weight: 600; font-size: 14px; min-height: 44px; font-family: 'IBM Plex Sans', sans-serif">Reply</button>
+              </sc-if>
+            </div>
+            <sc-if value="{{replyOpen}}" hint-placeholder-val="{{ false }}">
+              <form style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end">
+                <label style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 260px; font-size: 12px; color: var(--text-muted)">Registration number (EDRPOU)
+                  <input value="{{reg}}" onChange="{{setReg}}" placeholder="e.g. 41234567" style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 12px; font-size: 14px; font-family: 'JetBrains Mono', monospace; min-height: 44px; box-sizing: border-box">
+                </label>
+                <button class="btn" type="button" onClick="{{send}}" style="background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 6px; padding: 12px 18px; font-weight: 600; min-height: 44px">Send to analyst</button>
+              </form>
+            </sc-if>
+          </section>
+        </sc-if>
+        <sc-if value="{{answered}}" hint-placeholder-val="{{ false }}">
+          <section class="rise" style="border: 1px solid var(--ok-border); border-radius: 8px; background: var(--ok-bg); padding: 18px 24px; display: flex; gap: 12px; align-items: center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--ok)" stroke-width="2" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"></path></svg>
+            <div><strong style="font-weight: 600">Sent.</strong> <span style="color: var(--text-muted)">Analyst reviewing. Next action: WAIT · usually same day.</span></div>
+          </section>
+        </sc-if>
+
+        <section class="rise d3" style="border: 1px solid var(--border); border-radius: 8px; background: var(--surface)">
+          <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+            <h2 style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; font-weight: 500; color: var(--text-muted)">PARTIES · SANCTIONS SCREENING</h2>
+            <span style="font-size: 12px; color: var(--text-dim)">Lists: UK · EU · UN · US · screened 31 Oct 09:12</span>
+          </div>
+          <div style="overflow-x: auto">
+            <table style="width: 100%; border-collapse: collapse; min-width: 560px">
+              <thead>
+                <tr style="text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--text-dim)">
+                  <th style="padding: 10px 24px; font-weight: 500">ROLE</th><th style="padding: 10px 12px; font-weight: 500">NAME</th><th style="padding: 10px 12px; font-weight: 500">COUNTRY</th><th style="padding: 10px 24px; font-weight: 500">RESULT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{parties}}" as="p" hint-placeholder-count="5">
+                  <tr class="row" style="border-top: 1px solid var(--border)">
+                    <td style="padding: 14px 24px; color: var(--text-muted)">{{p.role}}</td>
+                    <td style="padding: 14px 12px; font-weight: 500">{{p.name}}</td>
+                    <td style="padding: 14px 12px; color: var(--text-muted)">{{p.country}}</td>
+                    <td style="padding: 14px 24px"><span style="{{p.chipStyle}}">{{p.result}}</span></td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="rise d4" style="border: 1px solid var(--border); border-radius: 8px; background: var(--surface)">
+          <div style="padding: 16px 24px; border-bottom: 1px solid var(--border)">
+            <h2 style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; font-weight: 500; color: var(--text-muted)">FILES</h2>
+          </div>
+          <ul style="list-style: none; margin: 0; padding: 0">
+            <li class="row" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 14px 24px; border-top: 1px solid var(--border)"><span>Kestrel-4_spec_v3.pdf <span style="color: var(--text-dim)">· Spec sheet · 2.1 MB</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; color: var(--accent); border: 1px solid var(--warn-border); border-radius: 8px; padding: 3px 8px">CONTROLLED TECH</span></li>
+            <li class="row" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 14px 24px; border-top: 1px solid var(--border)"><span>Kestrel-4_BOM.xlsx <span style="color: var(--text-dim)">· Bill of materials · 88 KB</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; color: var(--text-muted); border: 1px solid var(--border-strong); border-radius: 8px; padding: 3px 8px">OFFICIAL-SENSITIVE</span></li>
+            <li class="row" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 14px 24px; border-top: 1px solid var(--border)"><span>PO-KAL-2026-118.pdf <span style="color: var(--text-dim)">· Purchase order · 340 KB</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; color: var(--text-muted); border: 1px solid var(--border-strong); border-radius: 8px; padding: 3px 8px">UNCLASSIFIED</span></li>
+          </ul>
+        </section>
+      </div>
+
+      <aside class="rise d2" aria-label="Authorisation and status" style="flex: 1 1 320px; min-width: 0; max-width: 100%; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font-size: 13px">
+        <div style="padding: 18px 20px; border-bottom: 1px solid var(--border)">
+          <h2 style="margin: 0 0 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; font-weight: 500; color: var(--text-dim)">AUTHORISATION</h2>
+          <div style="display: grid; grid-template-columns: 1fr auto; row-gap: 8px; column-gap: 12px">
+            <span style="color: var(--text-muted)">Organisation</span><span style="color: var(--ok)">✓ Authorised</span>
+            <span style="color: var(--text-muted)">NDA · Terms · DPA</span><span style="color: var(--ok)">✓ Signed 12 Oct</span>
+            <span style="color: var(--text-muted)">Company checks</span><span style="color: var(--ok)">✓ Passed</span>
+            <span style="color: var(--text-muted)">Data ceiling</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px">OFFICIAL-SENSITIVE</span>
+            <span style="color: var(--text-muted)">Hosting</span><span>UK · London</span>
+            <span style="color: var(--text-muted)">Access</span><span>4 people</span>
+          </div>
+        </div>
+        <div style="padding: 18px 20px; border-bottom: 1px solid var(--border)">
+          <h2 style="margin: 0 0 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; font-weight: 500; color: var(--text-dim)">SANCTIONS</h2>
+          <div style="display: grid; grid-template-columns: 1fr auto; row-gap: 8px; column-gap: 12px">
+            <span style="color: var(--text-muted)">Buyer</span><span style="color: var(--ok)">✓ Clear</span>
+            <span style="color: var(--text-muted)">End user</span><span style="color: var(--ok)">✓ Clear</span>
+            <span style="color: var(--text-muted)">Consignee</span><span style="{{consigneeSide}}">{{consigneeSideText}}</span>
+            <span style="color: var(--text-muted)">Forwarder</span><span style="color: var(--ok)">✓ Clear</span>
+            <span style="color: var(--text-muted)">Destination</span><span style="color: var(--ok)">✓ Not restricted</span>
+          </div>
+        </div>
+        <div style="padding: 18px 20px; border-bottom: 1px solid var(--border)">
+          <h2 style="margin: 0 0 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; font-weight: 500; color: var(--text-dim)">CASE TEAM</h2>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; justify-content: space-between"><span>You · Approver</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); border: 1px solid var(--border-strong); border-radius: 8px; padding: 2px 6px">BASELINE</span></div>
+            <div style="display: flex; justify-content: space-between"><span>J. Hart · Analyst</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); border: 1px solid var(--border-strong); border-radius: 8px; padding: 2px 6px">BASELINE</span></div>
+            <div style="display: flex; justify-content: space-between"><span>R. Doyle · Officer</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); border: 1px solid var(--border-strong); border-radius: 8px; padding: 2px 6px">SC</span></div>
+          </div>
+        </div>
+        <div style="padding: 18px 20px; border-bottom: 1px solid var(--border)">
+          <h2 style="margin: 0 0 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; font-weight: 500; color: var(--text-dim)">FEES ON THIS CASE</h2>
+          <div style="display: grid; grid-template-columns: 1fr auto; row-gap: 8px">
+            <span style="color: var(--text-muted)">Sanctions checks</span><span>Included</span>
+            <span style="color: var(--text-muted)">Classification</span><span>Included</span>
+          </div>
+        </div>
+        <div style="padding: 18px 20px">
+          <h2 style="margin: 0 0 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; font-weight: 500; color: var(--text-dim)">AUDIT · LAST EVENTS</h2>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: var(--text-muted)">
+            <sc-for list="{{audit}}" as="a" hint-placeholder-count="4"><li><span style="font-family: 'JetBrains Mono', monospace; color: var(--text-dim)">{{a.t}}</span> · {{a.text}}</li></sc-for>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"light"},"$preview":{"width":1440,"height":1240}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { replyOpen: false, answered: false, reg: '' }; }
+  renderVals() { const th = (this.state && this.state.th) || (this.props.theme === 'dark' ? 'dark' : 'light'); return Object.assign(this.rv(), { themeClass: th, isDark: th === 'dark', isLight: th !== 'dark', themeLabel: th === 'dark' ? 'Switch to light mode' : 'Switch to dark mode', toggleTheme: () => this.setState({ th: th === 'dark' ? 'light' : 'dark' }) }); }
+  rv() {
+    const s = this.state;
+    const amber = 'var(--warn)', green = 'var(--ok)';
+    const raw = [
+      ['01', 'Intake', 'Complete', 'done'],
+      ['02', 'Sanctions', s.answered ? 'Analyst reviewing' : 'Possible match', 'active'],
+      ['03', 'Classification', 'AI + analyst', 'todo'],
+      ['04', 'Officer sign-off', '≤2 working days', 'todo'],
+      ['05', 'Route + quote', 'A · B · C · D', 'todo'],
+      ['06', 'Licence', 'ECJU ~4 weeks', 'todo'],
+      ['07', 'Ship', 'Customs + records', 'todo']
+    ];
+    const steps = raw.map(([n, label, sub, st]) => ({
+      n, label, sub,
+      dotClass: st === 'active' ? 'pulse' : '',
+      dotStyle: 'width:12px;height:12px;border-radius:50%;flex:none;' + (st === 'done' ? 'background:' + green : st === 'active' ? 'background:' + amber : 'border:2px solid var(--line-dim);box-sizing:border-box'),
+      barStyle: 'position:absolute;inset:0 auto 0 0;height:2px;background:' + green + ';width:' + (st === 'done' ? '100%' : '0'),
+      labelStyle: 'font-weight:600;font-size:14px;color:' + (st === 'todo' ? 'var(--text-dim)' : 'var(--text)')
+    }));
+    const chip = (kind) => {
+      const m = { clear: [green, 'var(--ok-soft)', 'var(--ok-bg)'], possible: [amber, 'var(--warn-border)', 'var(--warn-bg)'], review: ['var(--info)', 'var(--info-border)', 'var(--info-bg)'] }[kind];
+      return 'display:inline-flex;align-items:center;gap:6px;padding:3px 10px;font-family:JetBrains Mono,monospace;font-size:10px;letter-spacing:.12em;color:' + m[0] + ';border:1px solid ' + m[1] + ';background:' + m[2];
+    };
+    const parties = [
+      { role: 'Buyer', name: 'Kalyna Systems TOV', country: 'Ukraine', result: '✓ CLEAR', chipStyle: chip('clear') },
+      { role: 'End user', name: 'Kalyna Systems TOV', country: 'Ukraine', result: '✓ CLEAR', chipStyle: chip('clear') },
+      { role: 'Consignee', name: 'Volna Logistics LLC', country: 'Poland', result: s.answered ? '◷ IN REVIEW' : '▲ POSSIBLE MATCH', chipStyle: chip(s.answered ? 'review' : 'possible') },
+      { role: 'Forwarder', name: 'Baltic Air Cargo Ltd', country: 'United Kingdom', result: '✓ CLEAR', chipStyle: chip('clear') },
+      { role: 'Destination', name: 'Kyiv region', country: 'Ukraine', result: '✓ NOT RESTRICTED', chipStyle: chip('clear') }
+    ];
+    const audit = [
+      ...(s.answered ? [{ t: 'now', text: 'Client answered: reg. number' }] : []),
+      { t: '09:12', text: 'Screening run · 5 parties' },
+      { t: '09:12', text: 'Possible match flagged' },
+      { t: '09:08', text: 'Case submitted complete' },
+      { t: '09:01', text: '3 files uploaded' }
+    ].slice(0, 5);
+    return {
+      steps, parties, audit,
+      stateLabel: s.answered ? 'SANCTIONS REVIEW' : 'AWAITING YOUR ANSWER',
+      showAsk: !s.answered,
+      answered: s.answered,
+      replyOpen: s.replyOpen,
+      notOpen: !s.replyOpen,
+      reg: s.reg,
+      consigneeSide: 'color:' + (s.answered ? 'var(--info)' : amber),
+      consigneeSideText: s.answered ? '◷ In review' : '▲ Possible match',
+      openReply: () => this.setState({ replyOpen: true }),
+      setReg: (e) => this.setState({ reg: e.target.value }),
+      send: () => { if ((this.state.reg || '').trim().length >= 6) this.setState({ answered: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

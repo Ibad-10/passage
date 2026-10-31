@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Officer review</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+:root{--bg:oklch(0.145 0.003 286);--surface:oklch(0.172 0.004 286);--surface-2:oklch(0.215 0.005 286);--surface-3:oklch(0.225 0.006 286);--surface-inset:oklch(0.155 0.003 286);--border:oklch(1 0 0 / 7.5%);--border-strong:oklch(1 0 0 / 12%);--text:oklch(0.955 0.003 286);--text-muted:oklch(0.72 0.012 286);--text-dim:oklch(0.65 0.012 286);--line-dim:oklch(0.45 0.01 286);--accent:oklch(0.68 0.2 29);--accent-ink:oklch(0.14 0.01 40);--accent-hover:oklch(0.74 0.19 29);--accent-shine:oklch(0.82 0.13 40);--brand:oklch(0.68 0.2 29);--ok:oklch(0.74 0.14 160);--ok-ink:oklch(0.14 0.02 160);--ok-soft:oklch(0.74 0.14 160 / 16%);--ok-bg:oklch(0.74 0.14 160 / 8%);--ok-border:oklch(0.74 0.14 160 / 30%);--info:oklch(0.72 0.13 255);--info-bg:oklch(0.72 0.13 255 / 8%);--info-border:oklch(0.72 0.13 255 / 30%);--danger:oklch(0.7 0.18 22);--danger-bg:oklch(0.7 0.18 22 / 8%);--danger-border:oklch(0.7 0.18 22 / 35%);--warn:oklch(0.8 0.14 80);--warn-bg:oklch(0.8 0.14 80 / 8%);--warn-border:oklch(0.8 0.14 80 / 30%);--warn-text:oklch(0.8 0.14 80);--sel-bg:oklch(0.68 0.2 29 / 10%);--grid:oklch(1 0 0 / 4%)}
+.light{--bg:#F7F8FA;--surface:#FFFFFF;--surface-2:#EEF1F6;--surface-3:#EEF2FA;--surface-inset:#FFFFFF;--border:#DDE2EA;--border-strong:#C9D0DB;--text:#0E1A2F;--text-muted:#4A5872;--text-dim:#4A5872;--line-dim:#9AA5B8;--accent:#13306B;--accent-ink:#FFFFFF;--accent-hover:#0E2552;--accent-shine:#3A5DA8;--brand:#C2362B;--ok:#0F7A3D;--ok-ink:#FFFFFF;--ok-soft:#E3F3EA;--ok-bg:#F0F8F3;--ok-border:#B9DFC8;--info:#1D4ED8;--info-bg:#EEF3FD;--info-border:#BFD0F5;--danger:#B42318;--danger-bg:#FDF0EF;--danger-border:#F1C2BD;--warn:#A15C07;--warn-bg:#FBF4E8;--warn-border:#E9CF9F;--warn-text:#A15C07;--sel-bg:#E8EEF8;--grid:#E8EBF0}
+a{color:var(--accent)}a:hover{color:var(--accent-hover)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.rise{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.bar{transform-origin:left;animation:grow .9s cubic-bezier(.2,.7,.2,1) both}
+.btn{transition:background .15s,transform .15s,opacity .15s;cursor:pointer}.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.q{transition:background .15s}.q:hover{background:var(--surface-2)}
+textarea:focus,input:focus{outline:2px solid var(--accent);outline-offset:1px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px">
+  <header style="border-bottom: 1px solid var(--border)">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 14px clamp(16px, 3vw, 32px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+      <div style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap">
+        <span style="display: flex; align-items: center; gap: 10px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--info)" stroke-width="1.8" aria-hidden="true"><path d="M12 2 3 6v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V6l-9-4z"></path><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .14em; font-weight: 500">PASSAGE · DESK</span>
+        </span>
+        <nav style="display: flex; gap: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em">
+          <a href="#" style="color: var(--text); text-decoration: none">QUEUE</a><a href="#" style="color: var(--text-dim); text-decoration: none">RULEBOOK</a><a href="#" style="color: var(--text-dim); text-decoration: none">AUDIT</a>
+        </nav>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; color: var(--info); border: 1px solid var(--info-border); border-radius: 8px; padding: 5px 10px">R. DOYLE · COMPLIANCE OFFICER · SC</span><button type="button" class="btn" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" title="{{themeLabel}}" style="width: 44px; height: 44px; flex: none; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); cursor: pointer; padding: 0"><sc-if value="{{isDark}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if><sc-if value="{{isLight}}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></sc-if></button></div>
+    </div>
+  </header>
+
+  <main style="max-width: 1400px; margin: 0 auto; padding: 28px clamp(16px, 3vw, 32px) 64px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+    <nav aria-label="Desk queue" class="rise" style="flex: 1 1 260px; min-width: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--surface)">
+      <div style="padding: 14px 18px; border-bottom: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; color: var(--text-dim)">ASSIGNED TO ME · 4</div>
+      <ul style="list-style: none; margin: 0; padding: 0">
+        <li class="q" style="padding: 14px 18px; background: var(--warn-bg)"><div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent)">CTS-0142 · SANCTIONS</div><div style="font-weight: 500">Kestrel-4 → Ukraine</div><div style="font-size: 12px; color: var(--text-dim)">Due today 17:00</div></li>
+        <li class="q" style="padding: 14px 18px; border-top: 1px solid var(--border)"><div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted)">CTS-0137 · CLASSIFY</div><div style="font-weight: 500">TM-2 thermal → Poland</div><div style="font-size: 12px; color: var(--text-dim)">Due 3 Nov</div></li>
+        <li class="q" style="padding: 14px 18px; border-top: 1px solid var(--border)"><div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted)">CTS-0140 · EMERGING TECH</div><div style="font-weight: 500">Autonomy SDK → Norway</div><div style="font-size: 12px; color: var(--text-dim)">Panel 4 Nov</div></li>
+        <li class="q" style="padding: 14px 18px; border-top: 1px solid var(--border)"><div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted)">CTS-0131 · ECJU QUERY</div><div style="font-weight: 500">GCS software → Ukraine</div><div style="font-size: 12px; color: var(--text-dim)">Reply by 2 Nov</div></li>
+      </ul>
+    </nav>
+
+    <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+      <div class="rise">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; color: var(--text-dim); margin-bottom: 6px">CTS-0142 · SKYLINE DRONES LTD</div>
+        <h1 style="font-family: 'Source Serif 4', Georgia, serif; margin: 0; font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; letter-spacing: -.02em">Officer review</h1>
+      </div>
+
+      <section class="rise d1" style="border: 1px solid var(--border); border-radius: 8px; background: var(--surface)">
+        <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px">
+          <h2 style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; font-weight: 500; color: var(--text-muted)">1 · POSSIBLE SANCTIONS MATCH · CONSIGNEE</h2>
+          <span style="{{matchChip}}">{{matchLabel}}</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--border)">
+          <div style="background: var(--surface); padding: 20px 24px">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--text-dim); margin-bottom: 10px">PARTY ON CASE</div>
+            <div style="font-size: 17px; font-weight: 600">Volna Logistics LLC</div>
+            <dl style="margin: 12px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 13px"><dt style="color: var(--text-dim)">Country</dt><dd style="margin: 0">Poland</dd><dt style="color: var(--text-dim)">Reg. no.</dt><dd style="margin: 0; font-family: 'JetBrains Mono', monospace">0000781245 (KRS)</dd><dt style="color: var(--text-dim)">Address</dt><dd style="margin: 0">ul. Portowa 12, Gdynia</dd><dt style="color: var(--text-dim)">Source</dt><dd style="margin: 0">Client answer 31 Oct 10:04</dd></dl>
+          </div>
+          <div style="background: var(--surface); padding: 20px 24px">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--text-dim); margin-bottom: 10px">LIST ENTRY · UK CONSOLIDATED</div>
+            <div style="font-size: 17px; font-weight: 600">VOLNA LOGISTIKA OOO</div>
+            <dl style="margin: 12px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 13px"><dt style="color: var(--text-dim)">Country</dt><dd style="margin: 0">Russia</dd><dt style="color: var(--text-dim)">Reg. no.</dt><dd style="margin: 0; font-family: 'JetBrains Mono', monospace">1147847 (OGRN)</dd><dt style="color: var(--text-dim)">Regime</dt><dd style="margin: 0">Russia</dd><dt style="color: var(--text-dim)">Name score</dt><dd style="margin: 0"><span style="display: inline-block; width: 120px; height: 6px; background: var(--border); vertical-align: middle; margin-right: 8px"><span class="bar" style="display: block; height: 100%; width: 78%; background: var(--accent)"></span></span>0.78</dd></dl>
+          </div>
+        </div>
+        <div style="padding: 16px 24px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px">
+          <div style="font-size: 13px; color: var(--text-muted)">Analyst J. Hart proposes: <strong style="color: var(--text)">clear</strong>. “Different country, different registry and number; no ownership link found.”</div>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-muted)">Officer reason (required, shown in the case pack)
+            <textarea rows="2" value="{{reason}}" onChange="{{setReason}}" style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 10px; font-size: 14px; font-family: 'IBM Plex Sans', sans-serif"></textarea>
+          </label>
+          <div style="display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between">
+            <button class="btn" type="button" disabled="{{noReason}}" onClick="{{clearMatch}}" style="background: var(--ok); color: var(--ok-ink); border: 0; border-radius: 6px; padding: 11px 18px; font-weight: 600; min-height: 44px">Clear: not the listed party</button>
+            <button class="btn" type="button" disabled="{{noReason}}" onClick="{{confirmMatch}}" style="background: none; color: var(--danger); border: 1px solid var(--danger-border); border-radius: 8px; padding: 11px 18px; font-weight: 600; min-height: 44px">Confirm match → Do not proceed</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="rise d2" style="{{classSection}}">
+        <div style="padding: 16px 24px; border-bottom: 1px solid var(--border)">
+          <h2 style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; font-weight: 500; color: var(--text-muted)">2 · CLASSIFICATION · AI FIRST PASS + ANALYST</h2>
+        </div>
+        <ul style="list-style: none; margin: 0; padding: 0">
+          <sc-for list="{{suggestions}}" as="g" hint-placeholder-count="3">
+            <li style="display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; padding: 14px 24px; border-top: 1px solid var(--border)">
+              <div style="min-width: 0; flex: 1 1 280px"><div><span style="font-family: 'JetBrains Mono', monospace; font-weight: 500">{{g.entry}}</span> <span style="color: var(--text-dim)">· {{g.list}}</span></div><div style="font-size: 12px; color: var(--text-dim)">{{g.source}}</div></div>
+              <div style="display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px"><span style="width: 120px; height: 6px; background: var(--border)"><span class="bar" style="{{g.barStyle}}"></span></span>{{g.conf}}</div>
+              <span style="{{g.tagStyle}}">{{g.tag}}</span>
+            </li>
+          </sc-for>
+        </ul>
+        <div style="padding: 16px 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted)">US content: <strong style="color: var(--text)">14%</strong> (thermal core, EAR99). Below de minimis; no US re-export authorisation needed.</div>
+      </section>
+
+      <section class="rise d2" style="{{classSection}}">
+        <div style="padding: 16px 24px; border-bottom: 1px solid var(--border)">
+          <h2 style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; font-weight: 500; color: var(--text-muted)">3 · ROUTE DECISION</h2>
+        </div>
+        <fieldset style="border: 0; margin: 0; padding: 20px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+          <legend style="position: absolute; left: -9999px">Route</legend>
+          <sc-for list="{{routes}}" as="r" hint-placeholder-count="4">
+            <button type="button" onClick="{{r.pick}}" style="{{r.style}}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 600">{{r.k}}</span><span style="font-weight: 600">{{r.title}}</span><span style="font-size: 12px; color: var(--text-muted)">{{r.sub}}</span></button>
+          </sc-for>
+        </fieldset>
+        <div style="padding: 0 24px 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+          <sc-if value="{{canSign}}" hint-placeholder-val="{{ false }}">
+            <a href="Quote.dc.html" class="btn" style="background: var(--accent); color: var(--accent-ink); text-decoration: none; padding: 13px 22px; font-weight: 600; min-height: 46px; box-sizing: border-box; display: inline-flex; align-items: center">Sign classification and route {{route}}</a>
+          </sc-if>
+          <span style="font-size: 12px; color: var(--text-dim)">{{signHint}}</span>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"light"},"$preview":{"width":1440,"height":1080}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { reason: '', match: 'open', route: 'C' }; }
+  renderVals() { const th = (this.state && this.state.th) || (this.props.theme === 'dark' ? 'dark' : 'light'); return Object.assign(this.rv(), { themeClass: th, isDark: th === 'dark', isLight: th !== 'dark', themeLabel: th === 'dark' ? 'Switch to light mode' : 'Switch to dark mode', toggleTheme: () => this.setState({ th: th === 'dark' ? 'light' : 'dark' }) }); }
+  rv() {
+    const s = this.state, amber = 'var(--warn)', green = 'var(--ok)';
+    const chip = (c, b, bg) => 'font-family:JetBrains Mono,monospace;font-size:10px;letter-spacing:.14em;padding:4px 10px;color:' + c + ';border:1px solid ' + b + ';background:' + bg;
+    const sugg = [
+      { entry: 'ML10.c', list: 'UK Military List', source: 'Spec p.4: “designed for military reconnaissance”, encrypted datalink', c: 0.86, tag: 'ANALYST AGREES' },
+      { entry: '6A003.b.4', list: 'UK dual-use (thermal camera)', source: 'Spec p.7: 640×512 uncooled, 30 Hz', c: 0.71, tag: 'SUBSUMED BY ML10' },
+      { entry: '5A002.a', list: 'Encryption', source: 'Datalink AES-256', c: 0.64, tag: 'CHECKED' }
+    ];
+    const cleared = s.match === 'cleared';
+    const routes = [['A', 'Not controlled', 'Signed opinion · no fee'], ['B', 'General licence', 'OGEL if conditions met'], ['C', 'Individual licence', 'SIEL · ~4 weeks ECJU'], ['D', 'Do not proceed', 'Reasons · no fee']];
+    return {
+      reason: s.reason, noReason: s.reason.trim().length < 10 || s.match !== 'open',
+      setReason: (e) => this.setState({ reason: e.target.value }),
+      clearMatch: () => this.setState({ match: 'cleared' }),
+      confirmMatch: () => this.setState({ match: 'confirmed', route: 'D' }),
+      matchLabel: s.match === 'open' ? '▲ AWAITING OFFICER' : cleared ? '✓ CLEARED BY OFFICER' : '✕ CONFIRMED · CASE STOPPED',
+      matchChip: s.match === 'open' ? chip(amber, 'var(--warn-border)', 'var(--warn-bg)') : cleared ? chip(green, 'var(--ok-soft)', 'var(--ok-bg)') : chip('var(--danger)', 'var(--danger-border)', 'var(--danger-bg)'),
+      classSection: 'border:1px solid var(--border);background:var(--surface);transition:opacity .3s;opacity:' + (cleared ? '1' : '.45'),
+      suggestions: sugg.map(g => ({ ...g, conf: g.c.toFixed(2), barStyle: 'display:block;height:100%;width:' + Math.round(g.c * 100) + '%;background:' + (g.c >= 0.8 ? green : amber), tagStyle: chip('var(--text-muted)', 'var(--border-strong)', 'transparent') })),
+      routes: routes.map(([k, title, sub]) => ({
+        k, title, sub, pick: () => cleared && this.setState({ route: k }),
+        style: 'text-align:left;display:flex;flex-direction:column;gap:4px;padding:16px;min-height:96px;cursor:pointer;color:var(--text);font-family:IBM Plex Sans,sans-serif;background:' + (s.route === k ? 'var(--sel-bg)' : 'var(--surface-inset)') + ';border:1px solid ' + (s.route === k ? amber : 'var(--border-strong)')
+      })),
+      route: s.route, canSign: cleared,
+      signHint: cleared ? 'Your signature and reasoning go into the case pack and audit log.' : s.match === 'confirmed' ? 'Case closed as D. Client told plainly, no fee.' : 'Resolve the sanctions match first.'
+    };
+  }
+}
+</script>
+</body>
+</html>

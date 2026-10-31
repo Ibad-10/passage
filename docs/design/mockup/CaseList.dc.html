@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shipments</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+:root{--bg:oklch(0.145 0.003 286);--surface:oklch(0.172 0.004 286);--surface-2:oklch(0.215 0.005 286);--surface-3:oklch(0.225 0.006 286);--surface-inset:oklch(0.155 0.003 286);--border:oklch(1 0 0 / 7.5%);--border-strong:oklch(1 0 0 / 12%);--text:oklch(0.955 0.003 286);--text-muted:oklch(0.72 0.012 286);--text-dim:oklch(0.65 0.012 286);--line-dim:oklch(0.45 0.01 286);--accent:oklch(0.68 0.2 29);--accent-ink:oklch(0.14 0.01 40);--accent-hover:oklch(0.74 0.19 29);--accent-shine:oklch(0.82 0.13 40);--brand:oklch(0.68 0.2 29);--ok:oklch(0.74 0.14 160);--ok-ink:oklch(0.14 0.02 160);--ok-soft:oklch(0.74 0.14 160 / 16%);--ok-bg:oklch(0.74 0.14 160 / 8%);--ok-border:oklch(0.74 0.14 160 / 30%);--info:oklch(0.72 0.13 255);--info-bg:oklch(0.72 0.13 255 / 8%);--info-border:oklch(0.72 0.13 255 / 30%);--danger:oklch(0.7 0.18 22);--danger-bg:oklch(0.7 0.18 22 / 8%);--danger-border:oklch(0.7 0.18 22 / 35%);--warn:oklch(0.8 0.14 80);--warn-bg:oklch(0.8 0.14 80 / 8%);--warn-border:oklch(0.8 0.14 80 / 30%);--warn-text:oklch(0.8 0.14 80);--sel-bg:oklch(0.68 0.2 29 / 10%);--grid:oklch(1 0 0 / 4%)}
+.light{--bg:#F7F8FA;--surface:#FFFFFF;--surface-2:#EEF1F6;--surface-3:#EEF2FA;--surface-inset:#FFFFFF;--border:#DDE2EA;--border-strong:#C9D0DB;--text:#0E1A2F;--text-muted:#4A5872;--text-dim:#4A5872;--line-dim:#9AA5B8;--accent:#13306B;--accent-ink:#FFFFFF;--accent-hover:#0E2552;--accent-shine:#3A5DA8;--brand:#C2362B;--ok:#0F7A3D;--ok-ink:#FFFFFF;--ok-soft:#E3F3EA;--ok-bg:#F0F8F3;--ok-border:#B9DFC8;--info:#1D4ED8;--info-bg:#EEF3FD;--info-border:#BFD0F5;--danger:#B42318;--danger-bg:#FDF0EF;--danger-border:#F1C2BD;--warn:#A15C07;--warn-bg:#FBF4E8;--warn-border:#E9CF9F;--warn-text:#A15C07;--sel-bg:#E8EEF8;--grid:#E8EBF0}
+a{color:var(--accent)}a:hover{color:var(--accent-hover)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.rise{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}
+@keyframes count{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.num{animation:count .7s cubic-bezier(.2,.7,.2,1) both}
+.btn{transition:background .15s,transform .15s;cursor:pointer}.btn:hover{transform:translateY(-1px)}
+.row{transition:background .15s}.row:hover{background:var(--surface-2)}
+.tab{transition:color .15s,border-color .15s;cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px">
+  <header style="border-bottom: 1px solid var(--border)">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 14px clamp(16px, 3vw, 32px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+      <div style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap">
+        <span style="display: flex; align-items: center; gap: 10px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--brand)" stroke-width="1.8" aria-hidden="true"><path d="M12 2 3 6v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V6l-9-4z"></path><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .14em; font-weight: 500">PASSAGE</span>
+        </span>
+        <nav style="display: flex; gap: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em">
+          <a href="#" style="color: var(--text); text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 4px">SHIPMENTS</a>
+          <a href="#" style="color: var(--text-dim); text-decoration: none">PRODUCTS</a>
+          <a href="#" style="color: var(--text-dim); text-decoration: none">LICENCES</a>
+          <a href="#" style="color: var(--text-dim); text-decoration: none">RECORDS</a>
+        </nav>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: .1em">SKYLINE DRONES LTD</span>
+        <button type="button" class="btn" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" title="{{themeLabel}}" style="width: 44px; height: 44px; flex: none; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); cursor: pointer; padding: 0"><sc-if value="{{isDark}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if><sc-if value="{{isLight}}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></sc-if></button>
+        <span style="width: 32px; height: 32px; border-radius: 50%; background: var(--surface-3); border: 1px solid var(--border-strong); border-radius: 8px; display: grid; place-items: center; font-size: 12px; font-weight: 600">MO</span>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width: 1400px; margin: 0 auto; padding: 32px clamp(16px, 3vw, 32px) 64px">
+    <div class="rise" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 28px">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; color: var(--text-dim); margin-bottom: 8px">WORKSPACE · AUTHORISED</div>
+        <h1 style="font-family: 'Source Serif 4', Georgia, serif; margin: 0; font-size: clamp(26px, 3vw, 36px); font-weight: 600; letter-spacing: -.02em">Shipments</h1>
+      </div>
+      <a href="NewCase.dc.html" class="btn" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--accent-ink); text-decoration: none; padding: 13px 20px; font-weight: 600; min-height: 44px; box-sizing: border-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New shipment
+      </a>
+    </div>
+
+    <section class="rise d1" aria-label="Summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 28px">
+      <sc-for list="{{stats}}" as="k" hint-placeholder-count="4">
+        <div style="background: var(--surface); padding: 20px 22px">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; color: var(--text-dim)">{{k.label}}</div>
+          <div class="num" style="{{k.numStyle}}">{{k.value}}</div>
+          <div style="font-size: 12px; color: var(--text-dim)">{{k.sub}}</div>
+        </div>
+      </sc-for>
+    </section>
+
+    <section class="rise d2" style="border: 1px solid var(--border); border-radius: 8px; background: var(--surface)">
+      <div role="tablist" aria-label="Filter" style="display: flex; gap: 4px; padding: 0 16px; border-bottom: 1px solid var(--border); overflow-x: auto">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+          <button class="tab" role="tab" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}} <span style="color: var(--text-dim)">{{t.count}}</span></button>
+        </sc-for>
+      </div>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; border-collapse: collapse; min-width: 820px">
+          <thead>
+            <tr style="text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--text-dim)">
+              <th style="padding: 12px 24px; font-weight: 500">CASE</th><th style="padding: 12px; font-weight: 500">SHIPMENT</th><th style="padding: 12px; font-weight: 500">DESTINATION</th><th style="padding: 12px; font-weight: 500">STATUS</th><th style="padding: 12px; font-weight: 500">NEXT ACTION</th><th style="padding: 12px 24px; font-weight: 500">DEADLINE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+              <tr class="row" style="border-top: 1px solid var(--border)">
+                <td style="padding: 16px 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px"><a href="Main.dc.html" style="color: var(--text)">{{r.id}}</a></td>
+                <td style="padding: 16px 12px"><div style="font-weight: 500">{{r.title}}</div><div style="font-size: 12px; color: var(--text-dim)">{{r.buyer}}</div></td>
+                <td style="padding: 16px 12px; color: var(--text-muted)">{{r.dest}}</td>
+                <td style="padding: 16px 12px; color: var(--text-muted)">{{r.state}}</td>
+                <td style="padding: 16px 12px"><span style="{{r.chipStyle}}">{{r.action}}</span></td>
+                <td style="padding: 16px 24px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 12px">{{r.deadline}}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+      <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+        <p style="margin: 0; padding: 40px 24px; text-align: center; color: var(--text-dim)">No shipments in this view.</p>
+      </sc-if>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"light"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { tab: 'all' }; }
+  renderVals() { const th = (this.state && this.state.th) || (this.props.theme === 'dark' ? 'dark' : 'light'); return Object.assign(this.rv(), { themeClass: th, isDark: th === 'dark', isLight: th !== 'dark', themeLabel: th === 'dark' ? 'Switch to light mode' : 'Switch to dark mode', toggleTheme: () => this.setState({ th: th === 'dark' ? 'light' : 'dark' }) }); }
+  rv() {
+    const amber = 'var(--warn)';
+    const all = [
+      { id: 'CTS-0142', title: '15 × Kestrel-4 ISR drones', buyer: 'Kalyna Systems TOV', dest: 'Ukraine', state: 'Sanctions review', action: 'ANSWER', deadline: '28 Nov', group: 'action' },
+      { id: 'CTS-0139', title: '200 × FC-7 flight controllers', buyer: 'Nordvik Robotics AS', dest: 'Norway', state: 'Route quote', action: 'APPROVE', deadline: '14 Dec', group: 'action' },
+      { id: 'CTS-0137', title: 'Thermal module TM-2 (40 units)', buyer: 'Wisła Defence Sp. z o.o.', dest: 'Poland', state: 'Classifying', action: 'WAIT', deadline: '20 Nov', group: 'progress' },
+      { id: 'CTS-0131', title: 'Ground station software v2.4', buyer: 'Kalyna Systems TOV', dest: 'Ukraine', state: 'Filed with ECJU', action: 'WAIT', deadline: '05 Dec', group: 'progress' },
+      { id: 'CTS-0124', title: '60 × LiPo battery packs 6S', buyer: 'Baltic UAS OÜ', dest: 'Estonia', state: 'Not controlled', action: 'NONE', deadline: '—', group: 'closed' },
+      { id: 'CTS-0118', title: '30 × Kestrel-4 airframes', buyer: 'Wisła Defence Sp. z o.o.', dest: 'Poland', state: 'Licence granted', action: 'NONE', deadline: 'exp. Oct 2028', group: 'licensed' }
+    ];
+    const chip = (a) => {
+      const hot = a === 'ANSWER' || a === 'APPROVE' || a === 'UPLOAD' || a === 'SIGN';
+      return 'font-family:JetBrains Mono,monospace;font-size:10px;letter-spacing:.14em;padding:4px 9px;font-weight:600;' + (hot ? 'background:' + amber + ';color:var(--accent-ink)' : 'border:1px solid var(--border-strong);color:var(--text-muted)');
+    };
+    const tabsDef = [['all', 'All'], ['action', 'Needs your action'], ['progress', 'In progress'], ['licensed', 'Licensed'], ['closed', 'Closed']];
+    const tab = this.state.tab;
+    const rows = all.filter(r => tab === 'all' || r.group === tab).map(r => ({ ...r, chipStyle: chip(r.action) }));
+    return {
+      rows, empty: rows.length === 0,
+      tabs: tabsDef.map(([k, label]) => ({
+        label, count: k === 'all' ? all.length : all.filter(r => r.group === k).length,
+        style: 'background:none;border:0;border-bottom:2px solid ' + (tab === k ? amber : 'transparent') + ';color:' + (tab === k ? 'var(--text)' : 'var(--text-muted)') + ';padding:16px 12px;font-size:13px;font-weight:500;white-space:nowrap;min-height:48px;font-family:IBM Plex Sans,sans-serif',
+        pick: () => this.setState({ tab: k })
+      })),
+      stats: [
+        { label: 'NEEDS YOUR ACTION', value: '2', sub: '1 answer · 1 quote', numStyle: 'font-size:36px;font-weight:600;letter-spacing:-.02em;margin:8px 0 2px;color:' + amber },
+        { label: 'IN PROGRESS', value: '2', sub: 'Classifying · Filed', numStyle: 'font-size:36px;font-weight:600;letter-spacing:-.02em;margin:8px 0 2px' },
+        { label: 'ACTIVE LICENCES', value: '1', sub: 'SIEL · Poland', numStyle: 'font-size:36px;font-weight:600;letter-spacing:-.02em;margin:8px 0 2px' },
+        { label: 'AVG. TIME TO ROUTE', value: '2.4d', sub: 'Last 90 days', numStyle: 'font-size:36px;font-weight:600;letter-spacing:-.02em;margin:8px 0 2px' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

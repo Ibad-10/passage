@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sign in</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+:root{--bg:oklch(0.145 0.003 286);--surface:oklch(0.172 0.004 286);--surface-2:oklch(0.215 0.005 286);--surface-3:oklch(0.225 0.006 286);--surface-inset:oklch(0.155 0.003 286);--border:oklch(1 0 0 / 7.5%);--border-strong:oklch(1 0 0 / 12%);--text:oklch(0.955 0.003 286);--text-muted:oklch(0.72 0.012 286);--text-dim:oklch(0.65 0.012 286);--line-dim:oklch(0.45 0.01 286);--accent:oklch(0.68 0.2 29);--accent-ink:oklch(0.14 0.01 40);--accent-hover:oklch(0.74 0.19 29);--accent-shine:oklch(0.82 0.13 40);--brand:oklch(0.68 0.2 29);--ok:oklch(0.74 0.14 160);--ok-ink:oklch(0.14 0.02 160);--ok-soft:oklch(0.74 0.14 160 / 16%);--ok-bg:oklch(0.74 0.14 160 / 8%);--ok-border:oklch(0.74 0.14 160 / 30%);--info:oklch(0.72 0.13 255);--info-bg:oklch(0.72 0.13 255 / 8%);--info-border:oklch(0.72 0.13 255 / 30%);--danger:oklch(0.7 0.18 22);--danger-bg:oklch(0.7 0.18 22 / 8%);--danger-border:oklch(0.7 0.18 22 / 35%);--warn:oklch(0.8 0.14 80);--warn-bg:oklch(0.8 0.14 80 / 8%);--warn-border:oklch(0.8 0.14 80 / 30%);--warn-text:oklch(0.8 0.14 80);--sel-bg:oklch(0.68 0.2 29 / 10%);--grid:oklch(1 0 0 / 4%)}
+.light{--bg:#F7F8FA;--surface:#FFFFFF;--surface-2:#EEF1F6;--surface-3:#EEF2FA;--surface-inset:#FFFFFF;--border:#DDE2EA;--border-strong:#C9D0DB;--text:#0E1A2F;--text-muted:#4A5872;--text-dim:#4A5872;--line-dim:#9AA5B8;--accent:#13306B;--accent-ink:#FFFFFF;--accent-hover:#0E2552;--accent-shine:#3A5DA8;--brand:#C2362B;--ok:#0F7A3D;--ok-ink:#FFFFFF;--ok-soft:#E3F3EA;--ok-bg:#F0F8F3;--ok-border:#B9DFC8;--info:#1D4ED8;--info-bg:#EEF3FD;--info-border:#BFD0F5;--danger:#B42318;--danger-bg:#FDF0EF;--danger-border:#F1C2BD;--warn:#A15C07;--warn-bg:#FBF4E8;--warn-border:#E9CF9F;--warn-text:#A15C07;--sel-bg:#E8EEF8;--grid:#E8EBF0}
+a{color:var(--accent)}a:hover{color:var(--accent-hover)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.rise{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}
+@keyframes sweep{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
+.grid-bg{background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:48px 48px;position:relative;overflow:hidden}
+.grid-bg::after{content:"";position:absolute;left:0;right:0;top:0;height:40%;background:linear-gradient(180deg,transparent,rgba(29,78,216,.05),transparent);animation:sweep 6s linear infinite}
+.btn{transition:background .15s,transform .15s;cursor:pointer}.btn:hover{transform:translateY(-1px);background:var(--accent-hover)}
+input:focus{outline:2px solid var(--accent);outline-offset:1px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap">
+  <section class="grid-bg" style="flex: 1 1 520px; min-height: 420px; padding: clamp(24px, 5vw, 64px); display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--border); box-sizing: border-box">
+    <div style="display: flex; align-items: center; gap: 10px; position: relative; z-index: 1">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--brand)" stroke-width="1.8" aria-hidden="true"><path d="M12 2 3 6v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V6l-9-4z"></path><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .16em">PASSAGE</span>
+    </div>
+    <div style="position: relative; z-index: 1; max-width: 640px">
+      <h1 class="rise d1" style="font-family: 'Big Shoulders', 'IBM Plex Sans', sans-serif; text-transform: uppercase; margin: 0; font-size: clamp(56px, 8vw, 112px); line-height: .9; letter-spacing: -.01em; font-weight: 900">Ship it legally.</h1>
+      <p class="rise d2" style="margin: 20px 0 0; font-size: 17px; color: var(--text-muted); max-width: 440px; line-height: 1.5">Export licences for defence and dual-use goods.</p>
+    </div>
+    <div class="rise d3" style="display: flex; flex-wrap: wrap; gap: 28px; position: relative; z-index: 1; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; color: var(--text-dim)">
+      <span>UK-HOSTED · LONDON</span><span>MFA REQUIRED</span><span>EVERY ACTION LOGGED</span>
+    </div>
+  </section>
+
+  <section style="position: relative; flex: 1 1 420px; display: flex; align-items: center; justify-content: center; padding: clamp(24px, 5vw, 64px); box-sizing: border-box">
+    <div style="position: absolute; top: 16px; right: 16px"><button type="button" class="btn" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" title="{{themeLabel}}" style="width: 44px; height: 44px; flex: none; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); cursor: pointer; padding: 0"><sc-if value="{{isDark}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if><sc-if value="{{isLight}}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></sc-if></button></div>
+    <div class="rise d1" style="width: 100%; max-width: 400px">
+      <sc-if value="{{stepEmail}}" hint-placeholder-val="{{ true }}">
+        <h2 style="margin: 0 0 6px; font-size: 24px; font-weight: 600; letter-spacing: -.01em">Sign in</h2>
+        <p style="margin: 0 0 28px; color: var(--text-muted)">Workspace access for authorised client teams.</p>
+        <form style="display: flex; flex-direction: column; gap: 16px">
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+            <button class="btn" type="button" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--surface); color: var(--text); border: 1px solid var(--border-strong); border-radius: 8px; padding: 12px; min-height: 48px; font-size: 14px; font-family: 'IBM Plex Sans', sans-serif"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="9" height="9" fill="#F25022"></rect><rect x="13" y="2" width="9" height="9" fill="#7FBA00"></rect><rect x="2" y="13" width="9" height="9" fill="#00A4EF"></rect><rect x="13" y="13" width="9" height="9" fill="#FFB900"></rect></svg>Microsoft</button>
+            <button class="btn" type="button" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--surface); color: var(--text); border: 1px solid var(--border-strong); border-radius: 8px; padding: 12px; min-height: 48px; font-size: 14px; font-family: 'IBM Plex Sans', sans-serif"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.6a4.8 4.8 0 0 1-2.1 3.1v2.6h3.4c2-1.8 3.1-4.5 3.1-7.5z"></path><path fill="#34A853" d="M12 22c2.8 0 5.2-.9 6.9-2.5l-3.4-2.6c-.9.6-2.1 1-3.5 1-2.7 0-5-1.8-5.8-4.3H2.7v2.7A10 10 0 0 0 12 22z"></path><path fill="#FBBC05" d="M6.2 13.6a6 6 0 0 1 0-3.8V7.1H2.7a10 10 0 0 0 0 9.8l3.5-2.7z"></path><path fill="#EA4335" d="M12 6c1.5 0 2.9.5 4 1.5l3-3A10 10 0 0 0 2.7 7.1l3.5 2.7C7 7.8 9.3 6 12 6z"></path></svg>Google</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; color: var(--text-dim); font-size: 12px"><span style="flex: 1; height: 1px; background: var(--border)"></span>or<span style="flex: 1; height: 1px; background: var(--border)"></span></div>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-muted)">Work email
+            <input type="email" name="email" value="{{email}}" onChange="{{setEmail}}" autocomplete="email" placeholder="you@company.co.uk" style="background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 13px 14px; font-size: 15px; min-height: 48px; box-sizing: border-box">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-muted)">Password
+            <input type="password" name="password" autocomplete="current-password" style="background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 13px 14px; font-size: 15px; min-height: 48px; box-sizing: border-box">
+          </label>
+          <sc-if value="{{err}}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; color: var(--danger); font-size: 13px">Enter a valid work email.</p></sc-if>
+          <button class="btn" type="button" onClick="{{next}}" style="background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 6px; padding: 14px; font-weight: 600; font-size: 15px; min-height: 48px; margin-top: 8px">Continue</button>
+        </form>
+        <p style="margin: 24px 0 0; font-size: 13px; color: var(--text-dim)">New company? <a href="#">Request onboarding</a> · NDA, terms and company checks first.</p>
+        <p style="margin: 28px 0 0; padding-top: 16px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; letter-spacing: .12em">SECURED BY CLERK · MFA ENFORCED</p>
+      </sc-if>
+      <sc-if value="{{stepMfa}}" hint-placeholder-val="{{ false }}">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; color: var(--accent); margin-bottom: 12px">STEP 2 OF 2</div>
+        <h2 style="margin: 0 0 6px; font-size: 24px; font-weight: 600">Enter your 6-digit code</h2>
+        <p style="margin: 0 0 28px; color: var(--text-muted)">From your authenticator app for {{email}}.</p>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-muted)">Authentication code
+          <input inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000" style="background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 13px 14px; font-size: 22px; letter-spacing: .5em; font-family: 'JetBrains Mono', monospace; min-height: 52px; box-sizing: border-box">
+        </label>
+        <a href="CaseList.dc.html" class="btn" style="display: block; text-align: center; text-decoration: none; background: var(--accent); color: var(--accent-ink); padding: 14px; font-weight: 600; font-size: 15px; margin-top: 24px">Verify and enter workspace</a>
+        <button type="button" onClick="{{back}}" style="margin-top: 16px; background: none; border: 0; color: var(--text-muted); font-size: 13px; cursor: pointer; min-height: 44px; padding: 0">← Use a different email</button>
+      </sc-if>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"light"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { step: 'email', email: '', err: false }; }
+  renderVals() { const th = (this.state && this.state.th) || (this.props.theme === 'dark' ? 'dark' : 'light'); return Object.assign(this.rv(), { themeClass: th, isDark: th === 'dark', isLight: th !== 'dark', themeLabel: th === 'dark' ? 'Switch to light mode' : 'Switch to dark mode', toggleTheme: () => this.setState({ th: th === 'dark' ? 'light' : 'dark' }) }); }
+  rv() {
+    const s = this.state;
+    return {
+      stepEmail: s.step === 'email', stepMfa: s.step === 'mfa', email: s.email, err: s.err,
+      setEmail: (e) => this.setState({ email: e.target.value, err: false }),
+      next: () => /.+@.+\..+/.test(this.state.email) ? this.setState({ step: 'mfa' }) : this.setState({ err: true }),
+      back: () => this.setState({ step: 'email' })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>New shipment</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+:root{--bg:oklch(0.145 0.003 286);--surface:oklch(0.172 0.004 286);--surface-2:oklch(0.215 0.005 286);--surface-3:oklch(0.225 0.006 286);--surface-inset:oklch(0.155 0.003 286);--border:oklch(1 0 0 / 7.5%);--border-strong:oklch(1 0 0 / 12%);--text:oklch(0.955 0.003 286);--text-muted:oklch(0.72 0.012 286);--text-dim:oklch(0.65 0.012 286);--line-dim:oklch(0.45 0.01 286);--accent:oklch(0.68 0.2 29);--accent-ink:oklch(0.14 0.01 40);--accent-hover:oklch(0.74 0.19 29);--accent-shine:oklch(0.82 0.13 40);--brand:oklch(0.68 0.2 29);--ok:oklch(0.74 0.14 160);--ok-ink:oklch(0.14 0.02 160);--ok-soft:oklch(0.74 0.14 160 / 16%);--ok-bg:oklch(0.74 0.14 160 / 8%);--ok-border:oklch(0.74 0.14 160 / 30%);--info:oklch(0.72 0.13 255);--info-bg:oklch(0.72 0.13 255 / 8%);--info-border:oklch(0.72 0.13 255 / 30%);--danger:oklch(0.7 0.18 22);--danger-bg:oklch(0.7 0.18 22 / 8%);--danger-border:oklch(0.7 0.18 22 / 35%);--warn:oklch(0.8 0.14 80);--warn-bg:oklch(0.8 0.14 80 / 8%);--warn-border:oklch(0.8 0.14 80 / 30%);--warn-text:oklch(0.8 0.14 80);--sel-bg:oklch(0.68 0.2 29 / 10%);--grid:oklch(1 0 0 / 4%)}
+.light{--bg:#F7F8FA;--surface:#FFFFFF;--surface-2:#EEF1F6;--surface-3:#EEF2FA;--surface-inset:#FFFFFF;--border:#DDE2EA;--border-strong:#C9D0DB;--text:#0E1A2F;--text-muted:#4A5872;--text-dim:#4A5872;--line-dim:#9AA5B8;--accent:#13306B;--accent-ink:#FFFFFF;--accent-hover:#0E2552;--accent-shine:#3A5DA8;--brand:#C2362B;--ok:#0F7A3D;--ok-ink:#FFFFFF;--ok-soft:#E3F3EA;--ok-bg:#F0F8F3;--ok-border:#B9DFC8;--info:#1D4ED8;--info-bg:#EEF3FD;--info-border:#BFD0F5;--danger:#B42318;--danger-bg:#FDF0EF;--danger-border:#F1C2BD;--warn:#A15C07;--warn-bg:#FBF4E8;--warn-border:#E9CF9F;--warn-text:#A15C07;--sel-bg:#E8EEF8;--grid:#E8EBF0}
+a{color:var(--accent)}a:hover{color:var(--accent-hover)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.rise{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.slide{animation:slide .4s cubic-bezier(.2,.7,.2,1) both}
+.btn{transition:background .15s,transform .15s,border-color .15s;cursor:pointer}.btn:hover{transform:translateY(-1px)}
+.drop{transition:border-color .2s,background .2s}.drop:hover{border-color:var(--accent);background:var(--warn-bg)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px">
+  <header style="border-bottom: 1px solid var(--border)">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 14px clamp(16px, 3vw, 32px); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+      <a href="CaseList.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--brand)" stroke-width="1.8" aria-hidden="true"><path d="M12 2 3 6v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V6l-9-4z"></path><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .14em; font-weight: 500">PASSAGE</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 12px"><a href="CaseList.dc.html" style="color: var(--text-muted); text-decoration: none; font-size: 13px">Save draft and exit</a><button type="button" class="btn" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" title="{{themeLabel}}" style="width: 44px; height: 44px; flex: none; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); cursor: pointer; padding: 0"><sc-if value="{{isDark}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if><sc-if value="{{isLight}}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></sc-if></button></div>
+    </div>
+  </header>
+
+  <main style="max-width: 1180px; margin: 0 auto; padding: 32px clamp(16px, 3vw, 32px) 64px">
+    <div class="rise" style="margin-bottom: 28px">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; color: var(--text-dim); margin-bottom: 8px">NEW SHIPMENT · DRAFT</div>
+      <h1 style="font-family: 'Source Serif 4', Georgia, serif; margin: 0; font-size: clamp(26px, 3vw, 36px); font-weight: 600; letter-spacing: -.02em">What are you shipping, and to whom?</h1>
+      <p style="margin: 8px 0 0; color: var(--text-muted); max-width: 640px">Sanctions checks and classification are included. You only see a price if a licence or specialist review is needed, and nothing paid starts until you approve it.</p>
+    </div>
+
+    <ol aria-label="Steps" style="list-style: none; margin: 0 0 28px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{stepper}}" as="st" hint-placeholder-count="4">
+        <li>
+          <button type="button" onClick="{{st.go}}" style="{{st.style}}">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--text-dim)">{{st.n}}</span>
+            <span style="font-weight: 600; font-size: 13px">{{st.label}}</span>
+          </button>
+        </li>
+      </sc-for>
+    </ol>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+      <section style="flex: 999 1 560px; min-width: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); padding: clamp(18px, 3vw, 32px)">
+
+        <sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+          <div class="slide" style="display: flex; flex-direction: column; gap: 20px">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 600">1 · The goods</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-muted)">Product name
+                <input value="{{product}}" onChange="{{setProduct}}" placeholder="e.g. Kestrel-4 ISR drone" style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 12px; font-size: 14px; min-height: 46px; box-sizing: border-box">
+              </label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-muted)">Quantity
+                <input type="number" min="1" value="{{qty}}" onChange="{{setQty}}" style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 12px; font-size: 14px; min-height: 46px; box-sizing: border-box">
+              </label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-muted)">What's moving
+                <select style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 12px; font-size: 14px; min-height: 46px">
+                  <option>Physical goods</option><option>Software or firmware</option><option>Design files or technical data</option><option>Goods + software</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px">Files · tag each one's sensitivity. SECRET material is not accepted.</div>
+              <div style="display: flex; flex-direction: column; gap: 10px">
+                <sc-for list="{{files}}" as="f" hint-placeholder-count="3">
+                  <div class="drop" style="{{f.boxStyle}}">
+                    <div style="display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1 1 240px">
+                      <span style="{{f.iconStyle}}">{{f.icon}}</span>
+                      <div style="min-width: 0"><div style="font-weight: 500">{{f.label}} <span style="color: var(--text-dim); font-weight: 400">{{f.req}}</span></div><div style="font-size: 12px; color: var(--text-dim)">{{f.name}}</div></div>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap">
+                      <label style="font-size: 12px; color: var(--text-muted); display: flex; gap: 6px; align-items: center">Sensitivity
+                        <select onChange="{{f.setSens}}" style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 8px; font-size: 12px; min-height: 40px">
+                          <option value="unclassified">Unclassified</option><option value="official_sensitive">Official-Sensitive</option><option value="controlled_technology">Controlled tech</option><option value="secret">SECRET</option>
+                        </select>
+                      </label>
+                      <button class="btn" type="button" onClick="{{f.toggle}}" style="background: var(--surface-3); color: var(--text); border: 1px solid var(--border-strong); border-radius: 8px; padding: 8px 14px; min-height: 40px; font-size: 13px">{{f.btn}}</button>
+                    </div>
+                    <sc-if value="{{f.secret}}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; flex-basis: 100%; color: var(--danger); font-size: 12px">SECRET uploads are blocked. Contact your officer for an alternative route.</p></sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+          <div class="slide" style="display: flex; flex-direction: column; gap: 20px">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 600">2 · The parties</h2>
+            <p style="margin: 0; color: var(--text-muted)">Every party is screened against UK, EU, UN and US lists before any classification work starts.</p>
+            <sc-for list="{{parties}}" as="p" hint-placeholder-count="3">
+              <fieldset style="border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+                <legend style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--accent); padding: 0 6px">{{p.role}}</legend>
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: var(--text-muted)">Legal name<input value="{{p.name}}" onChange="{{p.setName}}" style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 11px; font-size: 14px; min-height: 44px; box-sizing: border-box"></label>
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: var(--text-muted)">Country<input value="{{p.country}}" onChange="{{p.setCountry}}" style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 11px; font-size: 14px; min-height: 44px; box-sizing: border-box"></label>
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: var(--text-muted)">Registration no. (optional)<input style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 11px; font-size: 14px; min-height: 44px; box-sizing: border-box; font-family: 'JetBrains Mono', monospace"></label>
+              </fieldset>
+            </sc-for>
+            <button class="btn" type="button" onClick="{{addParty}}" style="align-self: flex-start; background: none; color: var(--accent); border: 1px dashed var(--warn-border); border-radius: 8px; padding: 10px 16px; min-height: 44px; font-size: 13px">+ Add intermediary (forwarder, agent, bank)</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+          <div class="slide" style="display: flex; flex-direction: column; gap: 20px">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 600">3 · Destination and end use</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-muted)">Destination country
+                <select onChange="{{setDest}}" style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 12px; font-size: 14px; min-height: 46px">
+                  <option value="">Select…</option><option value="UA">Ukraine</option><option value="PL">Poland</option><option value="NO">Norway</option><option value="EE">Estonia</option><option value="RU">Russia</option>
+                </select>
+              </label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-muted)">Needed by
+                <input type="date" style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 12px; font-size: 14px; min-height: 46px; box-sizing: border-box; color-scheme: dark">
+              </label>
+            </div>
+            <sc-if value="{{prohibited}}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="border: 1px solid var(--danger-border); border-radius: 8px; background: var(--danger-bg); padding: 14px 16px; color: var(--danger)">Prohibited destination. This shipment would close as <strong>D. Do not proceed</strong>, with no fee.</div>
+            </sc-if>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-muted)">End use, in 1–3 sentences
+              <textarea rows="4" value="{{endUse}}" onChange="{{setEndUse}}" placeholder="e.g. Reconnaissance by the buyer's own units. No onward transfer." style="background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 12px; font-size: 14px; font-family: 'IBM Plex Sans', sans-serif; resize: vertical"></textarea>
+              <span style="font-size: 12px; color: var(--text-dim)">{{endUseCount}} / 600</span>
+            </label>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+          <div class="slide" style="display: flex; flex-direction: column; gap: 16px">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 600">4 · Review and submit</h2>
+            <p style="margin: 0; color: var(--text-muted)">On submit: sanctions screening runs within minutes, then AI first pass and analyst classification. An officer signs the outcome within 2 working days.</p>
+            <sc-if value="{{complete}}" hint-placeholder-val="{{ false }}">
+              <a href="Main.dc.html" class="btn" style="align-self: flex-start; background: var(--accent); color: var(--accent-ink); text-decoration: none; padding: 14px 22px; font-weight: 600; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Submit for screening</a>
+            </sc-if>
+            <sc-if value="{{incomplete}}" hint-placeholder-val="{{ true }}">
+              <div style="border: 1px solid var(--warn-border); border-radius: 8px; background: var(--warn-bg); padding: 14px 16px; color: var(--warn-text)">Add the missing items on the right to submit.</div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); gap: 12px">
+          <button class="btn" type="button" onClick="{{prev}}" style="background: none; border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); padding: 12px 18px; min-height: 44px; font-size: 14px">Back</button>
+          <sc-if value="{{notLast}}" hint-placeholder-val="{{ true }}">
+            <button class="btn" type="button" onClick="{{next}}" style="background: var(--text); color: var(--bg); border: 0; border-radius: 6px; padding: 12px 22px; min-height: 44px; font-weight: 600; font-size: 14px">Continue</button>
+          </sc-if>
+        </div>
+      </section>
+
+      <aside aria-label="Completeness" style="flex: 1 1 300px; min-width: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); padding: 20px">
+        <h2 style="margin: 0 0 6px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; font-weight: 500; color: var(--text-dim)">COMPLETENESS</h2>
+        <div style="height: 4px; background: var(--border); margin: 10px 0 16px; overflow: hidden"><div style="{{barStyle}}"></div></div>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+          <sc-for list="{{checklist}}" as="c" hint-placeholder-count="7">
+            <li style="display: flex; gap: 10px; align-items: center"><span style="{{c.style}}">{{c.mark}}</span><span style="{{c.textStyle}}">{{c.label}}</span></li>
+          </sc-for>
+        </ul>
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-dim); line-height: 1.6">Files stay in the UK (London). Controlled technical files are only shown to vetted people assigned to this case.</div>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"light"},"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = {
+      step: 1, product: '', qty: 15, dest: '', endUse: '',
+      files: { spec: false, bom: false, order: false },
+      sens: { spec: 'unclassified', bom: 'unclassified', order: 'unclassified' },
+      parties: [{ role: 'BUYER', name: '', country: '' }, { role: 'END USER', name: '', country: '' }, { role: 'CONSIGNEE', name: '', country: '' }]
+    };
+  }
+  renderVals() { const th = (this.state && this.state.th) || (this.props.theme === 'dark' ? 'dark' : 'light'); return Object.assign(this.rv(), { themeClass: th, isDark: th === 'dark', isLight: th !== 'dark', themeLabel: th === 'dark' ? 'Switch to light mode' : 'Switch to dark mode', toggleTheme: () => this.setState({ th: th === 'dark' ? 'light' : 'dark' }) }); }
+  rv() {
+    const s = this.state, amber = 'var(--warn)', green = 'var(--ok)';
+    const set = (patch) => this.setState(patch);
+    const labels = ['The goods', 'The parties', 'Destination + use', 'Review'];
+    const fileDefs = [['spec', 'Spec sheet', 'required', 'Kestrel-4_spec_v3.pdf'], ['bom', 'Bill of materials', 'recommended', 'Kestrel-4_BOM.xlsx'], ['order', 'Order or quote', 'required', 'PO-KAL-2026-118.pdf']];
+    const anySecret = Object.values(s.sens).includes('secret');
+    const files = fileDefs.map(([k, label, req, name]) => {
+      const on = s.files[k], secret = s.sens[k] === 'secret';
+      return {
+        label, req: '· ' + req, name: on ? name : 'Drop a file or attach',
+        icon: on ? '✓' : '↑', btn: on ? 'Remove' : 'Attach', secret,
+        iconStyle: 'width:32px;height:32px;display:grid;place-items:center;flex:none;font-weight:700;' + (on ? 'background:var(--ok-soft);color:' + green : 'border:1px dashed var(--line-dim);color:var(--text-dim)'),
+        boxStyle: 'display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border:1px ' + (on ? 'solid var(--ok-border)' : 'dashed var(--border-strong)') + ';background:' + (secret ? 'var(--danger-bg)' : 'var(--surface-inset)'),
+        toggle: () => set({ files: { ...this.state.files, [k]: !this.state.files[k] } }),
+        setSens: (e) => set({ sens: { ...this.state.sens, [k]: e.target.value } })
+      };
+    });
+    const partyOk = (r) => s.parties.some(p => p.role === r && p.name.trim() && p.country.trim());
+    const checks = [
+      ['Product name', !!s.product.trim()],
+      ['Spec sheet', s.files.spec],
+      ['Order or quote', s.files.order],
+      ['No SECRET files', !anySecret],
+      ['Buyer', partyOk('BUYER')],
+      ['End user', partyOk('END USER')],
+      ['Consignee', partyOk('CONSIGNEE')],
+      ['Destination', !!s.dest],
+      ['End use described', s.endUse.trim().length > 0 && s.endUse.length <= 600]
+    ];
+    const done = checks.filter(c => c[1]).length;
+    const complete = done === checks.length && s.dest !== 'RU';
+    return {
+      s1: s.step === 1, s2: s.step === 2, s3: s.step === 3, s4: s.step === 4, notLast: s.step < 4,
+      stepper: labels.map((label, i) => ({
+        n: '0' + (i + 1), label,
+        go: () => set({ step: i + 1 }),
+        style: 'width:100%;text-align:left;display:flex;flex-direction:column;gap:2px;padding:12px 14px;min-height:56px;cursor:pointer;color:var(--text);font-family:IBM Plex Sans,sans-serif;background:' + (s.step === i + 1 ? 'var(--sel-bg)' : 'var(--surface)') + ';border:1px solid ' + (s.step === i + 1 ? amber : 'var(--border)') + ';border-top:3px solid ' + (s.step > i + 1 ? green : s.step === i + 1 ? amber : 'var(--border)')
+      })),
+      product: s.product, qty: s.qty, endUse: s.endUse, endUseCount: s.endUse.length,
+      setProduct: (e) => set({ product: e.target.value }),
+      setQty: (e) => set({ qty: e.target.value }),
+      setDest: (e) => set({ dest: e.target.value }),
+      setEndUse: (e) => set({ endUse: e.target.value.slice(0, 600) }),
+      prohibited: s.dest === 'RU',
+      files,
+      parties: s.parties.map((p, i) => ({
+        ...p,
+        setName: (e) => set({ parties: this.state.parties.map((q, j) => j === i ? { ...q, name: e.target.value } : q) }),
+        setCountry: (e) => set({ parties: this.state.parties.map((q, j) => j === i ? { ...q, country: e.target.value } : q) })
+      })),
+      addParty: () => set({ parties: [...this.state.parties, { role: 'INTERMEDIARY', name: '', country: '' }] }),
+      checklist: checks.map(([label, ok]) => ({
+        label, mark: ok ? '✓' : '○',
+        style: 'width:20px;text-align:center;font-weight:700;color:' + (ok ? green : 'var(--line-dim)'),
+        textStyle: 'color:' + (ok ? 'var(--text)' : 'var(--text-muted)')
+      })),
+      barStyle: 'height:100%;background:' + (complete ? green : amber) + ';transition:width .4s;width:' + Math.round(done / checks.length * 100) + '%',
+      complete, incomplete: !complete,
+      next: () => set({ step: Math.min(4, this.state.step + 1) }),
+      prev: () => set({ step: Math.max(1, this.state.step - 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>
