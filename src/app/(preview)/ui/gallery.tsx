@@ -230,7 +230,7 @@ export function Gallery() {
                   </h3>
                   <span className="text-xs text-dim">Lists: UK · EU · UN · US · screened 31 Oct 09:12</span>
                 </div>
-                <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Parties">
+                <div className="relative overflow-x-auto" tabIndex={0} role="region" aria-label="Parties">
                   <table className="w-full min-w-[560px] border-collapse text-left">
                     <thead>
                       <tr className="font-mono text-[10px] tracking-[0.14em] text-dim">
@@ -270,6 +270,7 @@ export function Gallery() {
             />
           </div>
           <div className="mt-6 max-w-[420px]">
+            <p className="mb-2 font-mono text-[11px] tracking-[0.14em] text-dim">SIDE PANEL · LOCKED VARIANT</p>
             <SidePanel
               {...PANEL}
               locked="Consignee confirmed on the UK consolidated list. No uploads or work until resolved."

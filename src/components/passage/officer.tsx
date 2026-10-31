@@ -112,6 +112,8 @@ export function SanctionsReviewCard(p: SanctionsReviewCardProps) {
         <label className="flex flex-col gap-1.5 text-[13px] text-muted-foreground">
           Officer reason (required, shown in the case pack)
           <textarea
+            id="sanctions-reason"
+            name="reason"
             rows={2}
             value={reason}
             onChange={(e) => setReason(e.target.value)}
@@ -247,6 +249,7 @@ export function RouteSelector({
             )}
           >
             <input
+              id={`${name}-${r.k}`}
               type="radio"
               name={name}
               value={r.k}

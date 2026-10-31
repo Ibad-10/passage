@@ -29,7 +29,7 @@ export function CaseTimeline({ steps, className }: { steps: TimelineStep[]; clas
     <section
       aria-label="Progress"
       tabIndex={0}
-      className={cn('overflow-x-auto rounded-lg border border-border bg-surface', className)}
+      className={cn('relative overflow-x-auto rounded-lg border border-border bg-surface', className)}
     >
       <ol
         className="m-0 grid min-w-[780px] list-none px-6 py-5"

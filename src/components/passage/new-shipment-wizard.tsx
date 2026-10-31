@@ -144,7 +144,7 @@ export function NewShipmentWizard({
                 onClick={() => setStep(n)}
                 aria-current={step === n ? 'step' : undefined}
                 className={cn(
-                  'flex min-h-14 w-full flex-col gap-0.5 border border-t-[3px] px-3.5 py-3 text-left text-foreground transition-colors',
+                  'flex h-full min-h-14 w-full flex-col gap-0.5 border border-t-[3px] px-2.5 py-3 text-left sm:px-3.5 text-foreground transition-colors',
                   step === n ? 'border-warn bg-sel' : 'border-border bg-surface',
                   step > n && 'border-t-good',
                 )}
@@ -165,6 +165,7 @@ export function NewShipmentWizard({
               <label className={labelCls}>
                 Product name
                 <input
+                  id="wiz-product-name"
                   name={WIZARD_FIELDS.productName}
                   value={product}
                   onChange={(e) => setProduct(e.target.value)}
@@ -175,11 +176,11 @@ export function NewShipmentWizard({
               </label>
               <label className={labelCls}>
                 Quantity
-                <input name={WIZARD_FIELDS.quantity} type="number" min={1} defaultValue={1} className={field} />
+                <input id="wiz-quantity" name={WIZARD_FIELDS.quantity} type="number" min={1} defaultValue={1} className={field} />
               </label>
               <label className={labelCls}>
                 What&apos;s moving
-                <select name={WIZARD_FIELDS.goodsKind} className={field} defaultValue="goods">
+                <select id="wiz-goods-kind" name={WIZARD_FIELDS.goodsKind} className={field} defaultValue="goods">
                   <option value="goods">Physical goods</option>
                   <option value="software">Software or firmware</option>
                   <option value="technology">Design files or technical data</option>
@@ -226,6 +227,7 @@ export function NewShipmentWizard({
                         <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
                           Sensitivity
                           <select
+                            id={`wiz-sensitivity-${type}`}
                             name={WIZARD_FIELDS.sensitivity(type)}
                             value={sens[type]}
                             onChange={(e) => setSens((s) => ({ ...s, [type]: e.target.value as FileSensitivity }))}
@@ -299,6 +301,7 @@ export function NewShipmentWizard({
                     <label className={labelCls}>
                       Role
                       <select
+                        id={`wiz-party-${i}-type`}
                         name={WIZARD_FIELDS.partyType}
                         value={p.type}
                         onChange={(e) => setParty(p.key, { type: e.target.value as PartyType })}
@@ -315,6 +318,7 @@ export function NewShipmentWizard({
                   <label className={labelCls}>
                     Legal name
                     <input
+                      id={`wiz-party-${i}-name`}
                       name={WIZARD_FIELDS.partyName}
                       value={p.name}
                       onChange={(e) => setParty(p.key, { name: e.target.value })}
@@ -325,6 +329,7 @@ export function NewShipmentWizard({
                   <label className={labelCls}>
                     Country
                     <input
+                      id={`wiz-party-${i}-country`}
                       name={WIZARD_FIELDS.partyCountry}
                       value={p.country}
                       onChange={(e) => setParty(p.key, { country: e.target.value })}
@@ -334,7 +339,12 @@ export function NewShipmentWizard({
                   </label>
                   <label className={labelCls}>
                     Registration no. (optional)
-                    <input name={WIZARD_FIELDS.partyRegNo} autoComplete="off" className={cn(field, 'font-mono')} />
+                    <input
+                      id={`wiz-party-${i}-reg-no`}
+                      name={WIZARD_FIELDS.partyRegNo}
+                      autoComplete="off"
+                      className={cn(field, 'font-mono')}
+                    />
                   </label>
                   {!fixed && (
                     <button
@@ -364,6 +374,7 @@ export function NewShipmentWizard({
               <label className={labelCls}>
                 Destination country
                 <select
+                  id="wiz-destination"
                   name={WIZARD_FIELDS.destination}
                   value={dest}
                   onChange={(e) => setDest(e.target.value)}
@@ -379,7 +390,7 @@ export function NewShipmentWizard({
               </label>
               <label className={labelCls}>
                 Needed by
-                <input type="date" name={WIZARD_FIELDS.deadline} className={field} />
+                <input id="wiz-deadline" type="date" name={WIZARD_FIELDS.deadline} className={field} />
               </label>
             </div>
             {isProhibited && (
@@ -390,6 +401,7 @@ export function NewShipmentWizard({
             <label className={labelCls}>
               End use, in 1–3 sentences
               <textarea
+                id="wiz-end-use"
                 name={WIZARD_FIELDS.endUse}
                 rows={4}
                 maxLength={END_USE_MAX}
