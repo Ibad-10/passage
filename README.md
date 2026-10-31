@@ -136,7 +136,7 @@ Illustrative case compared with a law firm: preparation drops from 3–6 weeks t
 | UI | Tailwind v4, shadcn/ui, Motion, next-themes (light and dark). IBM Plex Sans, JetBrains Mono, Source Serif 4 |
 | Auth | Clerk (Google and email code, optional authenticator MFA) |
 | Data | Supabase Postgres and private Storage, London region, row-level security on every table |
-| AI | Anthropic SDK through the Mubit gateway (`claude-opus-5-5`), forced-schema tool output |
+| AI | Anthropic SDK through the Mubit gateway (`claude-opus-5-5`), structured output through a single tool call, checked with Zod |
 | Screening | Fixture list for the demo, OpenSanctions provider ready behind the same interface |
 | Tests | Vitest: 195 unit tests plus an integration test that runs the full case loop against the dev database |
 | Hosting | Vercel, London region, deployed from `main` |
