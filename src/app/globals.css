@@ -1,26 +1,275 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
+/*
+  Passage theme. Values are Precedent's (docs/design/DESIGN.md and the mockup :root/.light blocks).
+  Light is the default; dark is the .dark class set by next-themes.
+  Naming: shadcn tokens (primary, muted, accent = subtle hover...) plus Passage extras
+  (surface-*, dim, line-dim, brand, good/warn/bad/info with -bg/-border/-soft).
+*/
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-shine: var(--primary-shine);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-surface-inset: var(--surface-inset);
+  --color-dim: var(--text-dim);
+  --color-line-dim: var(--line-dim);
+  --color-brand: var(--brand);
+  --color-sel: var(--sel-bg);
+  --color-grid: var(--grid);
+
+  --color-good: var(--good);
+  --color-good-ink: var(--good-ink);
+  --color-good-soft: var(--good-soft);
+  --color-good-bg: var(--good-bg);
+  --color-good-border: var(--good-border);
+  --color-warn: var(--warn);
+  --color-warn-text: var(--warn-text);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-border: var(--warn-border);
+  --color-bad: var(--bad);
+  --color-bad-bg: var(--bad-bg);
+  --color-bad-border: var(--bad-border);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-info-border: var(--info-border);
+
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-heading: var(--font-source-serif), Georgia, serif;
+  --font-display: var(--font-big-shoulders), var(--font-plex), sans-serif;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.5rem;
+
+  --background: #f7f8fa;
+  --foreground: #0e1a2f;
+  --card: #ffffff;
+  --card-foreground: #0e1a2f;
+  --popover: #ffffff;
+  --popover-foreground: #0e1a2f;
+  --primary: #13306b;
+  --primary-foreground: #ffffff;
+  --primary-hover: #0e2552;
+  --primary-shine: #3a5da8;
+  --secondary: #eef1f6;
+  --secondary-foreground: #0e1a2f;
+  --muted: #eef1f6;
+  --muted-foreground: #4a5872;
+  --accent: #eef1f6;
+  --accent-foreground: #0e1a2f;
+  --destructive: #b42318;
+  --border: #dde2ea;
+  --border-strong: #c9d0db;
+  --input: #c9d0db;
+  --ring: #13306b;
+
+  --surface: #ffffff;
+  --surface-2: #eef1f6;
+  --surface-3: #eef2fa;
+  --surface-inset: #ffffff;
+  --text-dim: #4a5872;
+  --line-dim: #9aa5b8;
+  --brand: #c2362b;
+  --sel-bg: #e8eef8;
+  --grid: #e8ebf0;
+  --scan: rgb(29 78 216 / 5%);
+
+  --good: #0f7a3d;
+  --good-ink: #ffffff;
+  --good-soft: #e3f3ea;
+  --good-bg: #f0f8f3;
+  --good-border: #b9dfc8;
+  --warn: #a15c07;
+  --warn-text: #a15c07;
+  --warn-bg: #fbf4e8;
+  --warn-border: #e9cf9f;
+  --warn-pulse: rgb(161 92 7 / 45%);
+  --bad: #b42318;
+  --bad-bg: #fdf0ef;
+  --bad-border: #f1c2bd;
+  --info: #1d4ed8;
+  --info-bg: #eef3fd;
+  --info-border: #bfd0f5;
+}
+
+.dark {
+  --background: oklch(0.145 0.003 286);
+  --foreground: oklch(0.955 0.003 286);
+  --card: oklch(0.172 0.004 286);
+  --card-foreground: oklch(0.955 0.003 286);
+  --popover: oklch(0.172 0.004 286);
+  --popover-foreground: oklch(0.955 0.003 286);
+  --primary: oklch(0.68 0.2 29);
+  --primary-foreground: oklch(0.14 0.01 40);
+  --primary-hover: oklch(0.74 0.19 29);
+  --primary-shine: oklch(0.82 0.13 40);
+  --secondary: oklch(0.215 0.005 286);
+  --secondary-foreground: oklch(0.955 0.003 286);
+  --muted: oklch(0.215 0.005 286);
+  --muted-foreground: oklch(0.72 0.012 286);
+  --accent: oklch(0.215 0.005 286);
+  --accent-foreground: oklch(0.955 0.003 286);
+  --destructive: oklch(0.7 0.18 22);
+  --border: oklch(1 0 0 / 7.5%);
+  --border-strong: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.68 0.2 29);
+
+  --surface: oklch(0.172 0.004 286);
+  --surface-2: oklch(0.215 0.005 286);
+  --surface-3: oklch(0.225 0.006 286);
+  --surface-inset: oklch(0.155 0.003 286);
+  --text-dim: oklch(0.65 0.012 286);
+  --line-dim: oklch(0.45 0.01 286);
+  --brand: oklch(0.68 0.2 29);
+  --sel-bg: oklch(0.68 0.2 29 / 10%);
+  --grid: oklch(1 0 0 / 4%);
+  --scan: oklch(0.72 0.13 255 / 6%);
+
+  --good: oklch(0.74 0.14 160);
+  --good-ink: oklch(0.14 0.02 160);
+  --good-soft: oklch(0.74 0.14 160 / 16%);
+  --good-bg: oklch(0.74 0.14 160 / 8%);
+  --good-border: oklch(0.74 0.14 160 / 30%);
+  --warn: oklch(0.8 0.14 80);
+  --warn-text: oklch(0.8 0.14 80);
+  --warn-bg: oklch(0.8 0.14 80 / 8%);
+  --warn-border: oklch(0.8 0.14 80 / 30%);
+  --warn-pulse: oklch(0.8 0.14 80 / 45%);
+  --bad: oklch(0.7 0.18 22);
+  --bad-bg: oklch(0.7 0.18 22 / 8%);
+  --bad-border: oklch(0.7 0.18 22 / 35%);
+  --info: oklch(0.72 0.13 255);
+  --info-bg: oklch(0.72 0.13 255 / 8%);
+  --info-border: oklch(0.72 0.13 255 / 30%);
+
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  a {
+    color: var(--primary);
+  }
+  a:hover {
+    color: var(--primary-hover);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Motion. CSS keeps pulse/scan/sweep/shine; motion handles entrances and step transitions. */
+@keyframes passage-pulse {
+  0% { box-shadow: 0 0 0 0 var(--warn-pulse); }
+  70% { box-shadow: 0 0 0 10px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes passage-sweep {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(250%); }
+}
+@keyframes passage-scan {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+@keyframes passage-shine {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@utility pulse-warn {
+  animation: passage-pulse 1.8s infinite;
+}
+@utility scan {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, var(--scan), transparent);
+    animation: passage-scan 2.4s infinite;
+    pointer-events: none;
+  }
+}
+@utility grid-bg {
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 40%;
+    background: linear-gradient(180deg, transparent, var(--scan), transparent);
+    animation: passage-sweep 6s linear infinite;
+    pointer-events: none;
+  }
+}
+@utility shine {
+  background: linear-gradient(110deg, var(--primary) 40%, var(--primary-shine) 50%, var(--primary) 60%);
+  background-size: 200% 100%;
+  animation: passage-shine 3.5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
