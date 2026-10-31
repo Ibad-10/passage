@@ -37,6 +37,8 @@ describe.skipIf(!RUN)('core loop against the live dev DB', () => {
     const f = new FormData()
     f.set('destination', 'UA')
     f.set('end_use', `Agricultural field survey (${tag})`)
+    f.set('product_name', `SkyEye flight controller ${tag}`)
+    f.set('quantity', '200')
     const parties: [string, string][] = [
       ['buyer', `Kalyna Agro Systems ${tag} TOV`],
       ['end_user', `Polissia Field Survey ${tag} TOV`],
@@ -65,6 +67,11 @@ describe.skipIf(!RUN)('core loop against the live dev DB', () => {
     expect(results!.filter((r) => r.result !== 'clear')).toHaveLength(1)
     expect(consignee.list_versions).toBeTruthy()
     s.possibleId = consignee.id
+    const { listCasesForUser } = await import('@/server/queries')
+    expect((await listCasesForUser()).find((c) => c.id === s.caseId)).toMatchObject({
+      title: `200 × SkyEye flight controller ${tag}`,
+      buyerName: `Kalyna Agro Systems ${tag} TOV`,
+    })
   })
 
   it('an unassigned analyst gets 404; analyst and officer claim the case', async () => {

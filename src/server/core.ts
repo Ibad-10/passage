@@ -30,6 +30,7 @@ export interface CaseRow extends Case {
   ai_status: 'done' | 'failed' | null
   ai_result: AiResult | null
   route_note: string | null
+  title: string | null
   created_at: string
 }
 export interface FileRow extends CaseFile {
@@ -155,6 +156,8 @@ const IntakeSchema = z.object({
   destination: optional(country),
   end_use: optional(z.string().trim().max(600, 'end use over 600 characters')),
   deadline: optional(z.iso.date('deadline must be a date (YYYY-MM-DD)')),
+  product_name: optional(z.string().trim().max(200, 'product name over 200 characters')),
+  quantity: optional(z.string().trim().max(40, 'quantity over 40 characters')),
   parties: z.array(z.object({ type: z.enum(PARTY_TYPES), name: z.string().trim().min(1).max(300), country })),
   files: z.array(z.object({ type: z.enum(FILE_TYPES), sensitivity: z.enum(SENSITIVITIES) })),
 })
@@ -163,6 +166,7 @@ export interface Intake {
   destination?: string
   end_use?: string
   deadline?: string
+  title?: string // "<quantity> × <product_name>", or just the product name
   parties: { type: Party['type']; name: string; country: string }[]
   files: (DraftFile & { bytes: Buffer; mime: string })[]
 }
@@ -170,9 +174,10 @@ export interface Intake {
 const strings = (form: FormData, key: string) => form.getAll(key).map((v) => (typeof v === 'string' ? v : ''))
 
 // Form contract (every input has a name so a bot can fill it):
-//   destination, end_use, deadline
+//   destination, end_use, deadline, product_name, quantity
 //   parties: repeated party_type / party_name / party_country (rows with an empty name are skipped)
-//   files:   repeated file / file_type / file_sensitivity (an empty file input is skipped)
+//   files:   repeated file / file_type / file_sensitivity (an empty file input is skipped),
+//            and/or the wizard's fixed slots file_spec|file_bom|file_order with sensitivity_<type>
 export async function parseIntake(form: FormData): Promise<{ intake: Intake } | { errors: string[] }> {
   const pTypes = strings(form, 'party_type')
   const pNames = strings(form, 'party_name')
@@ -183,15 +188,18 @@ export async function parseIntake(form: FormData): Promise<{ intake: Intake } | 
 
   const fTypes = strings(form, 'file_type')
   const fSens = strings(form, 'file_sensitivity')
-  const uploads = form
-    .getAll('file')
-    .map((f, i) => ({ f, type: fTypes[i], sensitivity: fSens[i] }))
+  const slots = (['spec', 'bom', 'order'] as const).flatMap((t) =>
+    form.getAll(`file_${t}`).map((f) => ({ f, type: t as string, sensitivity: String(form.get(`sensitivity_${t}`) ?? '') })),
+  )
+  const uploads = [...form.getAll('file').map((f, i) => ({ f, type: fTypes[i], sensitivity: fSens[i] })), ...slots]
     .filter((u): u is { f: File; type: string; sensitivity: string } => typeof u.f !== 'string' && !!u.f.name)
 
   const parsed = IntakeSchema.safeParse({
     destination: form.get('destination'),
     end_use: form.get('end_use'),
     deadline: form.get('deadline'),
+    product_name: form.get('product_name'),
+    quantity: form.get('quantity'),
     parties,
     files: uploads.map((u) => ({ type: u.type, sensitivity: u.sensitivity })),
   })
@@ -211,7 +219,9 @@ export async function parseIntake(form: FormData): Promise<{ intake: Intake } | 
       }
     }),
   )
-  return { intake: { ...parsed.data, files } }
+  const { product_name, quantity, ...rest } = parsed.data
+  const title = product_name ? (quantity ? `${quantity} × ${product_name}` : product_name) : undefined
+  return { intake: { ...rest, title, files } }
 }
 
 // missingItems mixes per-file rejections (block the whole submission) with gaps (case goes to

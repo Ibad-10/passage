@@ -151,6 +151,25 @@ describe('createCase', () => {
     expect(audits('open_case')).toHaveLength(1)
     expect(audits('upload')).toHaveLength(2)
   })
+  it('accepts the wizard file slots and stores the title', async () => {
+    as(U.member)
+    const f = intakeForm({ files: [] })
+    f.set('product_name', 'SkyEye flight controller')
+    f.set('quantity', '200')
+    f.append('file_spec', new File(['spec body'], 'spec.txt'))
+    f.set('sensitivity_spec', 'official_sensitive')
+    f.append('file_order', new File(['order body'], 'order.pdf'))
+    f.set('sensitivity_order', 'unclassified')
+    f.append('file_bom', new File([], '')) // empty slot is skipped
+    f.set('sensitivity_bom', 'unclassified')
+    expect(await createCase(f)).toMatchObject({ state: 'SanctionsReview', missing: [] })
+    expect(h.db.rows('cases')[0].title).toBe('200 × SkyEye flight controller')
+    expect(h.db.rows('case_files').map((x) => [x.type, x.sensitivity])).toEqual([
+      ['spec', 'official_sensitive'],
+      ['order', 'unclassified'],
+    ])
+    expect(await listCasesForUser()).toMatchObject([{ title: '200 × SkyEye flight controller', buyerName: 'Kalyna Agro Systems TOV' }])
+  })
   it('a prohibited destination closes the case (match)', async () => {
     as(U.member)
     expect(await createCase(intakeForm({ destination: 'RU' }))).toMatchObject({ state: 'ClosedDoNotProceed' })

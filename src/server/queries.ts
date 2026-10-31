@@ -153,6 +153,8 @@ export async function getCaseForUser(caseId: string): Promise<CaseView> {
 
 export interface CaseListItem {
   id: string
+  title: string | null
+  buyerName: string | null // first party of type buyer
   state: CaseState
   clientAction: ClientAction
   destination: string | null
@@ -162,8 +164,10 @@ export interface CaseListItem {
   createdAt: string
 }
 
-const listItem = (c: CaseRow): CaseListItem => ({
+const listItem = (c: CaseRow, parties: Party[]): CaseListItem => ({
   id: c.id,
+  title: c.title,
+  buyerName: c.party_ids.map((pid) => parties.find((p) => p.id === pid)).find((p) => p?.type === 'buyer')?.name ?? null,
   state: c.state,
   clientAction: clientActionFor(c.state, c.pending_client_kind ?? undefined),
   destination: c.destination,
@@ -191,7 +195,8 @@ export async function listCasesForUser(): Promise<CaseListItem[]> {
       'list cases',
     )
   }
-  return cases.map(listItem)
+  const parties = await loadParties([...new Set(cases.flatMap((c) => c.party_ids))])
+  return cases.map((c) => listItem(c, parties))
 }
 
 // Target times from §4.3.
