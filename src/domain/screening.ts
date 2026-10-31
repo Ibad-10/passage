@@ -94,16 +94,22 @@ export function verdictFor(
   cfg: ScreeningConfig,
 ): { verdict: ScreeningVerdict; reasons: string[] } {
   if (!party.name?.trim()) throw new ScreeningValidationError('Party name is empty')
-  if (cfg.prohibitedDestinations.includes(destination)) {
-    return { verdict: 'match', reasons: [`Prohibited destination: ${destination}`] }
+  // Junk from a provider must never fall through to 'clear'.
+  if (!hits.every((h) => typeof h.score === 'number' && h.score >= 0 && h.score <= 1)) {
+    throw new ScreeningValidationError('Screening provider returned an invalid score')
+  }
+  const dest = destination.trim().toUpperCase()
+  const country = party.country.trim().toUpperCase()
+  if (cfg.prohibitedDestinations.includes(dest)) {
+    return { verdict: 'match', reasons: [`Prohibited destination: ${dest}`] }
   }
   const top = Math.max(0, ...hits.map((h) => h.score))
   // A name hit is only ever 'possible': an officer confirms a match (§5.3).
   if (top >= cfg.matchThreshold) {
     return { verdict: 'possible', reasons: [`Name similar to a listed party (score ${top.toFixed(2)})`] }
   }
-  if (INTERMEDIARY_TYPES.includes(party.type) && cfg.redFlagCountries.includes(party.country)) {
-    return { verdict: 'red_flag', reasons: [`${party.type} in red-flag country ${party.country}`] }
+  if (INTERMEDIARY_TYPES.includes(party.type) && cfg.redFlagCountries.includes(country)) {
+    return { verdict: 'red_flag', reasons: [`${party.type} in red-flag country ${country}`] }
   }
   return { verdict: 'clear', reasons: [] }
 }

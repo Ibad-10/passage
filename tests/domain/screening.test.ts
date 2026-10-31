@@ -111,6 +111,15 @@ describe('verdictFor (§5.3)', () => {
   it('every non-clear verdict has a reason', () => {
     expect(verdictFor(party(), [{ score: 0.9 }], 'RU', cfg).reasons.length).toBeGreaterThan(0)
   })
+  it('junk scores throw instead of clearing', () => {
+    expect(() => verdictFor(party(), [{ score: NaN }], 'UA', cfg)).toThrow(ScreeningValidationError)
+    expect(() => verdictFor(party(), [{ score: undefined as never }], 'UA', cfg)).toThrow(ScreeningValidationError)
+    expect(() => verdictFor(party(), [{ score: 1.5 }], 'UA', cfg)).toThrow(ScreeningValidationError)
+  })
+  it('country codes are case-insensitive', () => {
+    expect(verdictFor(party(), [], ' ru', cfg).verdict).toBe('match')
+    expect(verdictFor(party({ type: 'agent', country: 'kz' }), [], 'UA', cfg).verdict).toBe('red_flag')
+  })
   it('empty party name throws a validation error rather than clear', () => {
     expect(() => verdictFor(party({ name: ' ' }), [], 'UA', cfg)).toThrow(ScreeningValidationError)
   })
