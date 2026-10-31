@@ -123,7 +123,7 @@ export function SidePanel(p: SidePanelProps) {
               {r.decision ? (
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <button type="button" className="cursor-help underline decoration-dotted underline-offset-4">
+                    <button type="button" className="-my-3 cursor-help py-3 underline decoration-dotted underline-offset-4">
                       <StatusChip variant="text" status={r.status} label={r.text} />
                     </button>
                   </TooltipTrigger>

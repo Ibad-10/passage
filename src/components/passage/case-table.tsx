@@ -32,7 +32,7 @@ const th = 'px-3 py-3 font-mono text-[10px] font-medium tracking-[0.14em] text-d
 function Rows({ rows }: { rows: CaseRow[] }) {
   if (rows.length === 0) return <p className="m-0 px-6 py-10 text-center text-dim">No shipments in this view.</p>
   return (
-    <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Shipments table">
+    <div className="relative overflow-x-auto" tabIndex={0} role="region" aria-label="Shipments table">
       <table className="w-full min-w-[820px] border-collapse text-left">
         <thead>
           <tr>
@@ -47,7 +47,7 @@ function Rows({ rows }: { rows: CaseRow[] }) {
         <tbody>
           {rows.map((r) => (
             <tr key={r.id} className="border-t border-border transition-colors hover:bg-surface-2">
-              <td className="py-4 pr-3 pl-6 font-mono text-xs">
+              <td className="py-2 pr-3 pl-6 font-mono text-xs">
                 <Link href={r.href} className="inline-flex min-h-11 items-center text-foreground underline-offset-4">
                   {r.id}
                 </Link>
@@ -78,7 +78,7 @@ export function CaseTable({ rows }: { rows: CaseRow[] }) {
       <TabsList
         variant="line"
         aria-label="Filter shipments"
-        className="h-auto w-full justify-start gap-1 overflow-x-auto overflow-y-hidden rounded-none border-b border-border px-4 py-0"
+        className="h-auto group-data-horizontal/tabs:h-auto w-full justify-start gap-1 overflow-x-auto overflow-y-hidden rounded-none border-b border-border px-4 py-0"
       >
         {TABS.map(([k, label]) => (
           <TabsTrigger

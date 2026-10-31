@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useState, useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import Link from 'next/link'
 import { motion } from 'motion/react'
 import { Check } from 'lucide-react'
@@ -40,7 +40,6 @@ export function QuoteCard(p: QuoteCardProps) {
   const [question, setQuestion] = useState('')
   const [approvedLocal, setApprovedLocal] = useState(false)
   const [pending, startTransition] = useTransition()
-  const id = useId()
   const price = gbp(p.quote.amount)
   const approved = approvedLocal || p.quote.status === 'approved'
 
@@ -123,9 +122,10 @@ export function QuoteCard(p: QuoteCardProps) {
             </ol>
           </div>
           <p className="m-0 border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground">{GUARANTEE_TEXT}</p>
-          <label htmlFor={`${id}-ack`} className="flex min-h-11 cursor-pointer items-start gap-2.5 text-[13px]">
+          <label htmlFor="quote-authorised" className="flex min-h-11 cursor-pointer items-start gap-2.5 text-[13px]">
             <Checkbox
-              id={`${id}-ack`}
+              id="quote-authorised"
+              name="authorised"
               checked={ack}
               onCheckedChange={(v) => setAck(v === true)}
               className="mt-0.5 size-[18px]"
@@ -171,6 +171,8 @@ export function QuoteCard(p: QuoteCardProps) {
               <label className="flex flex-col gap-1.5 text-[13px] text-muted-foreground">
                 Your question goes to the analyst on this case
                 <textarea
+                  id="quote-question"
+                  name="question"
                   rows={3}
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}

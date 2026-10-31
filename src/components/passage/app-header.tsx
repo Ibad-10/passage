@@ -30,31 +30,31 @@ export function AppHeader({
 }) {
   return (
     <header className="border-b border-border bg-background">
-      <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-x-3 gap-y-1 px-[clamp(16px,3vw,32px)] py-2.5">
-        <div className="flex min-w-0 flex-wrap items-center gap-x-7">
-          <Link href={homeHref} aria-label="Passage home" className="flex min-h-11 items-center">
-            <PassageLogo />
-          </Link>
-          <nav aria-label="Main" className="-mx-2 flex overflow-x-auto">
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={item.active ? 'page' : undefined}
-                className={cn(
-                  'flex min-h-11 items-center px-2 font-mono text-[11px] tracking-[0.12em] uppercase no-underline',
-                  item.active
-                    ? 'text-foreground [&>span]:border-primary'
-                    : 'text-dim hover:text-foreground',
-                )}
-              >
-                <span className="border-b-2 border-transparent pb-1 pt-[6px]">{item.label}</span>
-              </Link>
-            ))}
-          </nav>
-        </div>
+      <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-7 gap-y-0 px-[clamp(16px,3vw,32px)] py-2.5">
+        <Link href={homeHref} aria-label="Passage home" className="flex min-h-11 items-center">
+          <PassageLogo />
+        </Link>
+        {/* Phones: logo + controls on row one, nav on row two. */}
+        <nav aria-label="Main" className="order-last -mx-2 flex basis-full overflow-x-auto md:order-none md:basis-auto">
+          {nav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={item.active ? 'page' : undefined}
+              className={cn(
+                'flex min-h-11 items-center px-2 font-mono text-[11px] tracking-[0.12em] uppercase no-underline',
+                item.active
+                  ? 'text-foreground [&>span]:border-primary'
+                  : 'text-dim hover:text-foreground',
+              )}
+            >
+              <span className="border-b-2 border-transparent pb-1 pt-[6px]">{item.label}</span>
+            </Link>
+          ))}
+        </nav>
         <div className="ml-auto flex min-w-0 items-center gap-3">
-          <span className="truncate font-mono text-[11px] tracking-[0.1em] text-dim uppercase">{orgName}</span>
+          {/* Hidden on phones so logo and controls share one row. */}
+          <span className="hidden truncate font-mono text-[11px] tracking-[0.1em] text-dim uppercase sm:inline">{orgName}</span>
           <ThemeToggle />
           {userSlot}
         </div>
