@@ -4,7 +4,7 @@ import 'server-only'
 import { db } from './db'
 
 export async function logEvent(e: {
-  actorId: string
+  actorId: string | null // null only when there is no authenticated actor (e.g. a failed dev entry)
   action: string
   object: string
   objectId: string

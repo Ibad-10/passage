@@ -1,4 +1,5 @@
-// Dev user switcher. Outside production anyone may use it; in production only a Clerk user whose
+// Dev user switcher. Outside production anyone may use it; in production only a valid dev_session
+// holder (/dev/enter) or a Clerk user whose
 // verified email is in DEV_EMAILS. Everyone else gets a 404. Plain markup; styled by the UI layer.
 import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
@@ -33,7 +34,7 @@ async function UserList() {
       <ul>
         {(users.data ?? []).map((u) => (
           <li key={u.id}>
-            <button type="submit" name="userId" value={u.id}>
+            <button type="submit" name="userId" value={u.id} id={`act-as-${u.id}`}>
               <span>{u.name}</span> <span>{u.role}</span> <span>{orgName(u.org_id)}</span>
             </button>
           </li>
