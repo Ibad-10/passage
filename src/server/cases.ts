@@ -82,6 +82,7 @@ export async function createCase(
     .from('cases')
     .insert({
       org_id: user.org_id,
+      title: intake.title ?? null,
       party_ids: partyIds,
       destination: intake.destination ?? null,
       end_use: intake.end_use ?? null,

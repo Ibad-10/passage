@@ -15,7 +15,7 @@ const DEFAULTS: Record<string, (now: string) => Row> = {
   case_files: (now) => ({ uploaded_at: now }),
 }
 
-class Query implements PromiseLike<{ data: unknown; error: { message: string; code?: string } | null }> {
+class Query {
   private filters: Filter[] = []
   private op: 'select' | 'insert' | 'update' = 'select'
   private payload: Row | Row[] = {}
@@ -120,8 +120,8 @@ export class FakeDb {
   rpcs: Record<string, (args: Row, db: FakeDb) => { message: string } | null> = {}
   failInsert?: (table: string, rows: Row[]) => { message: string; code?: string } | null
 
-  constructor(seed: Record<string, Row[]> = {}) {
-    this.tables = structuredClone(seed)
+  constructor(seed: Record<string, object[]> = {}) {
+    this.tables = structuredClone(seed) as Record<string, Row[]>
   }
   from(table: string) {
     return new Query(this, table)
