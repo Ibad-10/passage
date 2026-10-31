@@ -1,0 +1,33 @@
+{
+  "_note": "Diversion red-flag data, spec §5.2. Placeholder lists (ISO 3166-1 alpha-2); confirm with officer before use. Adjacency is partial and read both ways.",
+  "neighbours": {
+    "GB": ["IE"],
+    "UA": ["PL", "SK", "HU", "RO", "MD", "BY", "RU"],
+    "PL": ["DE", "CZ", "SK", "LT", "BY", "RU"],
+    "SK": ["CZ", "AT", "HU"],
+    "HU": ["AT", "SI", "HR", "RS", "RO"],
+    "RO": ["MD", "BG", "RS"],
+    "DE": ["DK", "NL", "BE", "LU", "FR", "CH", "AT", "CZ"],
+    "FR": ["BE", "LU", "CH", "IT", "ES"],
+    "CZ": ["AT"],
+    "AT": ["CH", "IT", "SI"],
+    "LT": ["LV", "BY", "RU"],
+    "LV": ["EE", "BY", "RU"],
+    "EE": ["RU"],
+    "TR": ["GR", "BG", "GE", "AM", "AZ", "IR", "IQ", "SY"],
+    "GE": ["RU", "AZ", "AM"],
+    "AM": ["AZ", "IR"],
+    "KZ": ["RU", "CN", "KG", "UZ", "TM"],
+    "KG": ["CN", "TJ", "UZ"]
+  },
+  "sectors": {
+    "defence": ["military", "defence", "defense", "armed forces", "army", "navy", "air force", "weapons", "munitions", "national guard", "border guard"],
+    "agriculture": ["agriculture", "agricultural", "farm", "farming", "crop", "crops", "agronomy", "irrigation"],
+    "medical": ["medical", "hospital", "clinic", "healthcare", "pharmaceutical"],
+    "energy": ["energy", "power plant", "oil", "gas", "solar", "wind farm", "utility"],
+    "telecoms": ["telecom", "telecoms", "telecommunications", "broadband", "network operator"],
+    "mining": ["mining", "quarry"],
+    "construction": ["construction", "surveying", "infrastructure inspection"],
+    "research": ["university", "research", "laboratory", "academic"]
+  }
+}

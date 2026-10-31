@@ -1,0 +1,21 @@
+{
+  "_note": "Emerging-technology triggers, spec §4.4. Keyword lists are placeholders; confirm with a specialist before use.",
+  "lowConfidence": 0.6,
+  "nearThresholdFraction": 0.1,
+  "recentChangeMonths": 12,
+  "watchList": {
+    "AI and autonomy software": ["AI", "artificial intelligence", "machine learning", "neural network", "autonomy", "autonomous", "computer vision", "target recognition"],
+    "quantum": ["quantum"],
+    "advanced chips": ["ASIC", "FPGA", "GPU", "semiconductor", "chip", "chips", "microelectronics"],
+    "counter-drone": ["counter-drone", "counter-UAS", "C-UAS", "anti-drone", "drone jammer", "jammer"],
+    "directed energy": ["directed energy", "high-energy laser", "high-power microwave", "laser weapon"],
+    "advanced materials": ["metamaterial", "metamaterials", "ceramic matrix", "radar-absorbing", "radar absorbing", "stealth coating"]
+  },
+  "intangibles": {
+    "source_code": ["source code"],
+    "model_weights": ["model weights", "trained model"],
+    "design_files": ["design files", "CAD files", "CAD model", "schematics"],
+    "training_data": ["training data", "training dataset"],
+    "remote_access": ["remote access", "remote login"]
+  }
+}
