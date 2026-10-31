@@ -28,7 +28,7 @@ async function UserList() {
     db().from('organisations').select('id, name'),
   ])
   if (users.error) throw new Error(`load users: ${users.error.message}`)
-  const orgName = (id: string | null) => orgs.data?.find((o) => o.id === id)?.name ?? 'Passage (internal)'
+  const orgName = (id: string | null) => orgs.data?.find((o) => o.id === id)?.name ?? 'no client organisation'
   return (
     <form action={actAs}>
       <ul>
